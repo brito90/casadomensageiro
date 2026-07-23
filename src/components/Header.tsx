@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom'
 const navItems = [
   { name: 'Início', path: '/' },
   { name: 'Festas', path: '/festas' },
+  { name: 'Loja', path: '/loja' },
   { name: 'Búzios', path: '/buzios' },
   { name: 'Pai de Santo', path: '/pai-de-santo' },
-  { name: 'Biblioteca', path: '/biblioteca' },
 ]
 
 function Header() {

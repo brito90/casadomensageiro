@@ -4,6 +4,7 @@ import Biblioteca from './pages/Biblioteca'
 import Festas from './pages/Festas'
 import Buzios from './pages/Buzios'
 import PaiDeSanto from './pages/PaiDeSanto'
+import Loja from './pages/Loja'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/festas" element={<Festas />} />
         <Route path="/buzios" element={<Buzios />} />
         <Route path="/pai-de-santo" element={<PaiDeSanto />} />
+        <Route path="/loja" element={<Loja />} />
       </Routes>
     </Router>
   )
