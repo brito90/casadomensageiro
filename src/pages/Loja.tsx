@@ -1,6 +1,8 @@
 import Layout from '../layouts/Layout'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTilt } from '../utils/useTilt'
+import { useCart } from '../context/CartContext'
 
 const categorias = [
   { id: 'todos', name: 'Todos', icon: '✨' },
@@ -13,263 +15,92 @@ const categorias = [
 ]
 
 const produtos = [
-  // Nichos
-  {
-    id: 1,
-    name: 'Nicho Ogum',
-    category: 'nichos',
-    price: 189.90,
-    originalPrice: 249.90,
-    description: 'Nicho artesanal em madeira para devoção a Ogum. Inclui detalhes em ferro e velas.',
-    rating: 5,
-    reviews: 45,
-    badge: 'MAIS VENDIDO',
-    colors: ['Vermelho', 'Preto'],
-    image: '/assets/images/nicho-ogum.jpg',
-  },
-  {
-    id: 2,
-    name: 'Nicho Oxum',
-    category: 'nichos',
-    price: 179.90,
-    originalPrice: 229.90,
-    description: 'Nicho em madeira com detalhes dourados para Oxum. Espelho e acessórios inclusos.',
-    rating: 5,
-    reviews: 38,
-    badge: 'NOVO',
-    colors: ['Dourado', 'Amarelo'],
-    image: '/assets/images/nicho-oxum.jpg',
-  },
-  {
-    id: 3,
-    name: 'Nicho Iemanjá',
-    category: 'nichos',
-    price: 199.90,
-    originalPrice: 259.90,
-    description: 'Nicho azul marinho com conchas e espelho para Iemanjá.',
-    rating: 5,
-    reviews: 52,
-    badge: 'DESTAQUE',
-    colors: ['Azul', 'Branco'],
-    image: '/assets/images/nicho-iemanja.jpg',
-  },
-  // Sabonetes
-  {
-    id: 4,
-    name: 'Sabonete de Rosas',
-    category: 'sabonetes',
-    price: 29.90,
-    originalPrice: 45.90,
-    description: 'Sabonete artesanal com pétalas de rosas naturais. Hidrata e perfuma.',
-    rating: 5,
-    reviews: 127,
-    badge: 'BEST SELLER',
-    colors: ['Rosa', 'Vermelho'],
-    image: '/assets/images/sabonete-rosas.jpg',
-  },
-  {
-    id: 5,
-    name: 'Sabonete de Lavanda',
-    category: 'sabonetes',
-    price: 27.90,
-    originalPrice: 42.90,
-    description: 'Sabonete com lavanda natural. Calma e renova.',
-    rating: 5,
-    reviews: 98,
-    badge: '',
-    colors: ['Roxo', 'Lilás'],
-    image: '/assets/images/sabonete-lavanda.jpg',
-  },
-  {
-    id: 6,
-    name: 'Sabonete de Alecrim',
-    category: 'sabonetes',
-    price: 25.90,
-    originalPrice: 39.90,
-    description: 'Sabonete com alecrim. Proteção e limpeza espiritual.',
-    rating: 4,
-    reviews: 76,
-    badge: '',
-    colors: ['Verde', 'Natural'],
-    image: '/assets/images/sabonete-alecrim.jpg',
-  },
-  // Camisas
-  {
-    id: 7,
-    name: 'Camisa Casa do Mensageiro',
-    category: 'camisas',
-    price: 89.90,
-    originalPrice: 129.90,
-    description: 'Camisa oficial do terreiro. Algodão premium, corte moderno.',
-    rating: 5,
-    reviews: 203,
-    badge: 'EXCLUSIVO',
-    colors: ['Branco', 'Preto', 'Vermelho'],
-    image: '/assets/images/camisa-oficial.jpg',
-  },
-  {
-    id: 8,
-    name: 'Camisa Ogum',
-    category: 'camisas',
-    price: 79.90,
-    originalPrice: 119.90,
-    description: 'Camisa com estampa de Ogum. Algodão 100%.',
-    rating: 5,
-    reviews: 156,
-    badge: '',
-    colors: ['Vermelho', 'Preto'],
-    image: '/assets/images/camisa-ogum.jpg',
-  },
-  {
-    id: 9,
-    name: 'Camisa Oxum',
-    category: 'camisas',
-    price: 79.90,
-    originalPrice: 119.90,
-    description: 'Camisa com estampa de Oxum. Algodão 100%.',
-    rating: 5,
-    reviews: 142,
-    badge: '',
-    colors: ['Amarelo', 'Dourado'],
-    image: '/assets/images/camisa-oxum.jpg',
-  },
-  // Perfumes
-  {
-    id: 10,
-    name: 'Perfume Axé',
-    category: 'perfumes',
-    price: 149.90,
-    originalPrice: 199.90,
-    description: 'Perfume com óleos essenciais para atrair axé e prosperidade.',
-    rating: 5,
-    reviews: 89,
-    badge: 'PREMIUM',
-    colors: ['50ml', '100ml'],
-    image: '/assets/images/perfume-axe.jpg',
-  },
-  {
-    id: 11,
-    name: 'Perfume Oxum',
-    category: 'perfumes',
-    price: 139.90,
-    originalPrice: 189.90,
-    description: 'Perfume floral com essências de Oxum. Amor e fertilidade.',
-    rating: 5,
-    reviews: 76,
-    badge: '',
-    colors: ['50ml', '100ml'],
-    image: '/assets/images/perfume-oxum.jpg',
-  },
-  {
-    id: 12,
-    name: 'Perfume Ogum',
-    category: 'perfumes',
-    price: 139.90,
-    originalPrice: 189.90,
-    description: 'Perfume com essências de Ogum. Força e proteção.',
-    rating: 5,
-    reviews: 68,
-    badge: '',
-    colors: ['50ml', '100ml'],
-    image: '/assets/images/perfume-ogum.jpg',
-  },
-  // Brindes
-  {
-    id: 13,
-    name: 'Kit Bem-Vindo',
-    category: 'brindes',
-    price: 49.90,
-    originalPrice: 79.90,
-    description: 'Kit para novos membros: vela, sabonete e cartinha de boas-vindas.',
-    rating: 5,
-    reviews: 234,
-    badge: 'INDICADO',
-    colors: ['Único'],
-    image: '/assets/images/kit-boas-vindas.jpg',
-  },
-  {
-    id: 14,
-    name: 'Vela de Sete Cores',
-    category: 'brindes',
-    price: 19.90,
-    originalPrice: 35.90,
-    description: 'Vela artesanal de sete cores para trabalhos espirituais.',
-    rating: 5,
-    reviews: 312,
-    badge: 'POPULAR',
-    colors: ['Sete Cores'],
-    image: '/assets/images/vela-sete-cores.jpg',
-  },
-  {
-    id: 15,
-    name: 'Pacote de Oferendas',
-    category: 'brindes',
-    price: 39.90,
-    originalPrice: 59.90,
-    description: 'Kit completo de oferendas: flores, velas e defumação.',
-    rating: 5,
-    reviews: 178,
-    badge: '',
-    colors: ['Completo'],
-    image: '/assets/images/pacote-oferendas.jpg',
-  },
-  // Acessórios
-  {
-    id: 16,
-    name: 'Colar de Contas',
-    category: 'acessorios',
-    price: 69.90,
-    originalPrice: 99.90,
-    description: 'Colar artesanal de contas para Orixá. Fio encerado.',
-    rating: 5,
-    reviews: 145,
-    badge: 'ARTESANAL',
-    colors: ['Ogum', 'Oxum', 'Xangô'],
-    image: '/assets/images/colar-contas.jpg',
-  },
-  {
-    id: 17,
-    name: 'Pulseira de Proteção',
-    category: 'acessorios',
-    price: 39.90,
-    originalPrice: 59.90,
-    description: 'Pulseira de protection com pedras naturais.',
-    rating: 5,
-    reviews: 201,
-    badge: '',
-    colors: ['Preto', 'Vermelho'],
-    image: '/assets/images/pulseira-protecao.jpg',
-  },
-  {
-    id: 18,
-    name: 'Abadá Cerimonial',
-    category: 'acessorios',
-    price: 199.90,
-    originalPrice: 299.90,
-    description: 'Abadá branco para rituais. Algodão premium, bordado artesanal.',
-    rating: 5,
-    reviews: 67,
-    badge: 'EXCLUSIVO',
-    colors: ['Branco', 'Off-white'],
-    image: '/assets/images/abadá-cerimonial.jpg',
-  },
+  { id: 1, name: 'Nicho Ogum', category: 'nichos', price: 189.90, originalPrice: 249.90, description: 'Nicho artesanal em madeira para devoção a Ogum. Inclui detalhes em ferro e velas.', rating: 5, reviews: 45, badge: 'MAIS VENDIDO', colors: ['Vermelho', 'Preto'], image: '/assets/images/nicho-ogum.jpg' },
+  { id: 2, name: 'Nicho Oxum', category: 'nichos', price: 179.90, originalPrice: 229.90, description: 'Nicho em madeira com detalhes dourados para Oxum. Espelho e acessórios inclusos.', rating: 5, reviews: 38, badge: 'NOVO', colors: ['Dourado', 'Amarelo'], image: '/assets/images/nicho-oxum.jpg' },
+  { id: 3, name: 'Nicho Iemanjá', category: 'nichos', price: 199.90, originalPrice: 259.90, description: 'Nicho azul marinho com conchas e espelho para Iemanjá.', rating: 5, reviews: 52, badge: 'DESTAQUE', colors: ['Azul', 'Branco'], image: '/assets/images/nicho-iemanja.jpg' },
+  { id: 4, name: 'Sabonete de Rosas', category: 'sabonetes', price: 29.90, originalPrice: 45.90, description: 'Sabonete artesanal com pétalas de rosas naturais. Hidrata e perfuma.', rating: 5, reviews: 127, badge: 'BEST SELLER', colors: ['Rosa', 'Vermelho'], image: '/assets/images/sabonete-rosas.jpg' },
+  { id: 5, name: 'Sabonete de Lavanda', category: 'sabonetes', price: 27.90, originalPrice: 42.90, description: 'Sabonete com lavanda natural. Calma e renova.', rating: 5, reviews: 98, badge: '', colors: ['Roxo', 'Lilás'], image: '/assets/images/sabonete-lavanda.jpg' },
+  { id: 6, name: 'Sabonete de Alecrim', category: 'sabonetes', price: 25.90, originalPrice: 39.90, description: 'Sabonete com alecrim. Proteção e limpeza espiritual.', rating: 4, reviews: 76, badge: '', colors: ['Verde', 'Natural'], image: '/assets/images/sabonete-alecrim.jpg' },
+  { id: 7, name: 'Camisa Casa do Mensageiro', category: 'camisas', price: 89.90, originalPrice: 129.90, description: 'Camisa oficial do terreiro. Algodão premium, corte moderno.', rating: 5, reviews: 203, badge: 'EXCLUSIVO', colors: ['Branco', 'Preto', 'Vermelho'], image: '/assets/images/camisa-oficial.jpg' },
+  { id: 8, name: 'Camisa Ogum', category: 'camisas', price: 79.90, originalPrice: 119.90, description: 'Camisa com estampa de Ogum. Algodão 100%.', rating: 5, reviews: 156, badge: '', colors: ['Vermelho', 'Preto'], image: '/assets/images/camisa-ogum.jpg' },
+  { id: 9, name: 'Camisa Oxum', category: 'camisas', price: 79.90, originalPrice: 119.90, description: 'Camisa com estampa de Oxum. Algodão 100%.', rating: 5, reviews: 142, badge: '', colors: ['Amarelo', 'Dourado'], image: '/assets/images/camisa-oxum.jpg' },
+  { id: 10, name: 'Perfume Axé', category: 'perfumes', price: 149.90, originalPrice: 199.90, description: 'Perfume com óleos essenciais para atrair axé e prosperidade.', rating: 5, reviews: 89, badge: 'PREMIUM', colors: ['50ml', '100ml'], image: '/assets/images/perfume-axe.jpg' },
+  { id: 11, name: 'Perfume Oxum', category: 'perfumes', price: 139.90, originalPrice: 189.90, description: 'Perfume floral com essências de Oxum. Amor e fertilidade.', rating: 5, reviews: 76, badge: '', colors: ['50ml', '100ml'], image: '/assets/images/perfume-oxum.jpg' },
+  { id: 12, name: 'Perfume Ogum', category: 'perfumes', price: 139.90, originalPrice: 189.90, description: 'Perfume com essências de Ogum. Força e proteção.', rating: 5, reviews: 68, badge: '', colors: ['50ml', '100ml'], image: '/assets/images/perfume-ogum.jpg' },
+  { id: 13, name: 'Kit Bem-Vindo', category: 'brindes', price: 49.90, originalPrice: 79.90, description: 'Kit para novos membros: vela, sabonete e cartinha de boas-vindas.', rating: 5, reviews: 234, badge: 'INDICADO', colors: ['Único'], image: '/assets/images/kit-boas-vindas.jpg' },
+  { id: 14, name: 'Vela de Sete Cores', category: 'brindes', price: 19.90, originalPrice: 35.90, description: 'Vela artesanal de sete cores para trabalhos espirituais.', rating: 5, reviews: 312, badge: 'POPULAR', colors: ['Sete Cores'], image: '/assets/images/vela-sete-cores.jpg' },
+  { id: 15, name: 'Pacote de Oferendas', category: 'brindes', price: 39.90, originalPrice: 59.90, description: 'Kit completo de oferendas: flores, velas e defumação.', rating: 5, reviews: 178, badge: '', colors: ['Completo'], image: '/assets/images/pacote-oferendas.jpg' },
+  { id: 16, name: 'Colar de Contas', category: 'acessorios', price: 69.90, originalPrice: 99.90, description: 'Colar artesanal de contas para Orixá. Fio encerado.', rating: 5, reviews: 145, badge: 'ARTESANAL', colors: ['Ogum', 'Oxum', 'Xangô'], image: '/assets/images/colar-contas.jpg' },
+  { id: 17, name: 'Pulseira de Proteção', category: 'acessorios', price: 39.90, originalPrice: 59.90, description: 'Pulseira de proteção com pedras naturais.', rating: 5, reviews: 201, badge: '', colors: ['Preto', 'Vermelho'], image: '/assets/images/pulseira-protecao.jpg' },
+  { id: 18, name: 'Abadá Cerimonial', category: 'acessorios', price: 199.90, originalPrice: 299.90, description: 'Abadá branco para rituais. Algodão premium, bordado artesanal.', rating: 5, reviews: 67, badge: 'EXCLUSIVO', colors: ['Branco', 'Off-white'], image: '/assets/images/abadá-cerimonial.jpg' },
 ]
 
-function ProdutoCard({ produto }: { produto: typeof produtos[0] }) {
-  const { ref, handleMouseMove, handleMouseLeave } = useTilt<HTMLDivElement>({ maxTilt: 10, scale: 1.03 })
-  const [isHovered, setIsHovered] = useState(false)
+function ProdutoCard({ produto, viewMode }: { produto: typeof produtos[0], viewMode: 'grid' | 'list' }) {
+  const { ref, handleMouseMove, handleMouseLeave } = useTilt<HTMLDivElement>({ maxTilt: 8, scale: 1.02 })
+  const { addToCart, toggleFavorite, isFavorite } = useCart()
+  const discount = Math.round((1 - produto.price / produto.originalPrice) * 100)
+
+  if (viewMode === 'list') {
+    return (
+      <div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        <Link to={`/produto/${produto.id}`} className="w-48 h-48 bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center flex-shrink-0">
+          <span className="text-6xl">
+            {produto.category === 'nichos' ? '🏠' :
+             produto.category === 'sabonetes' ? '🧼' :
+             produto.category === 'camisas' ? '👕' :
+             produto.category === 'perfumes' ? '💐' :
+             produto.category === 'brindes' ? '🎁' : '📿'}
+          </span>
+        </Link>
+        <div className="flex-1 p-5 flex flex-col justify-between">
+          <div>
+            <div className="flex items-start justify-between mb-2">
+              <Link to={`/produto/${produto.id}`} className="font-heading font-bold text-lg text-primary hover:text-primary-600 transition-colors">
+                {produto.name}
+              </Link>
+              <button
+                onClick={() => toggleFavorite(produto.id)}
+                className={`transition-colors ${isFavorite(produto.id) ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
+              >
+                <svg className="w-5 h-5" fill={isFavorite(produto.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+            </div>
+            <p className="text-gray-600 text-sm mb-3 line-clamp-2">{produto.description}</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-bold text-primary">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
+              {discount > 0 && <span className="text-sm text-green-600 font-semibold">-{discount}%</span>}
+            </div>
+            <button
+              onClick={() => addToCart(produto)}
+              className="btn-primary text-sm px-4 py-2"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onMouseEnter={() => setIsHovered(true)}
       className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
       style={{ transformStyle: 'preserve-3d' }}
     >
-      {/* Image */}
-      <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-50 overflow-hidden">
+      <Link to={`/produto/${produto.id}`} className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-50 block">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-6xl group-hover:scale-110 transition-transform duration-300">
             {produto.category === 'nichos' ? '🏠' :
@@ -279,8 +110,6 @@ function ProdutoCard({ produto }: { produto: typeof produtos[0] }) {
              produto.category === 'brindes' ? '🎁' : '📿'}
           </span>
         </div>
-        
-        {/* Badge */}
         {produto.badge && (
           <div className="absolute top-3 left-3">
             <span className="gradient-primary text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -288,70 +117,46 @@ function ProdutoCard({ produto }: { produto: typeof produtos[0] }) {
             </span>
           </div>
         )}
-
-        {/* Quick Actions */}
-        <div className={`absolute top-3 right-3 flex flex-col gap-2 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
-          <button className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </button>
-          <button className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Content */}
+        <button
+          onClick={(e) => { e.preventDefault(); toggleFavorite(produto.id); }}
+          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            isFavorite(produto.id) ? 'bg-red-500 text-white' : 'bg-white/80 text-gray-400 hover:text-red-500'
+          }`}
+        >
+          <svg className="w-4 h-4" fill={isFavorite(produto.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
+      </Link>
       <div className="p-5">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="flex items-center gap-1">
-            {[...Array(produto.rating)].map((_, i) => (
-              <svg key={i} className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
+        <div className="flex items-center gap-1 mb-2">
+          {[...Array(produto.rating)].map((_, i) => (
+            <svg key={i} className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
           <span className="text-xs text-gray-500">({produto.reviews})</span>
         </div>
-
-        <h3 className="font-heading font-bold text-lg text-primary mb-2 group-hover:text-primary-600 transition-colors">
-          {produto.name}
-        </h3>
-        
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-          {produto.description}
-        </p>
-
-        {/* Colors */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-xs text-gray-500">Cores:</span>
-          <div className="flex gap-1">
-            {produto.colors.map((cor, index) => (
-              <span key={index} className="text-xs bg-gray-100 px-2 py-0.5 rounded">
-                {cor}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Price */}
+        <Link to={`/produto/${produto.id}`}>
+          <h3 className="font-heading font-bold text-lg text-primary mb-2 group-hover:text-primary-600 transition-colors">
+            {produto.name}
+          </h3>
+        </Link>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{produto.description}</p>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-2xl font-bold text-primary">
-              R$ {produto.price.toFixed(2).replace('.', ',')}
-            </span>
-            {produto.originalPrice > produto.price && (
+            <span className="text-xl font-bold text-primary">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
+            {discount > 0 && (
               <span className="text-sm text-gray-400 line-through ml-2">
                 R$ {produto.originalPrice.toFixed(2).replace('.', ',')}
               </span>
             )}
           </div>
-          <button className="btn-primary text-sm px-4 py-2">
-            Comprar
+          <button
+            onClick={() => addToCart(produto)}
+            className="btn-primary text-sm px-4 py-2"
+          >
+            + Carrinho
           </button>
         </div>
       </div>
@@ -363,11 +168,15 @@ function Loja() {
   const [selectedCategory, setSelectedCategory] = useState('todos')
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('popular')
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
+  const { favorites, favoritesCount } = useCart()
 
   const filteredProducts = produtos.filter(produto => {
     const matchesCategory = selectedCategory === 'todos' || produto.category === selectedCategory
     const matchesSearch = produto.name.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesFavorites = !showFavoritesOnly || favorites.includes(produto.id)
+    return matchesCategory && matchesSearch && matchesFavorites
   }).sort((a, b) => {
     if (sortBy === 'price-low') return a.price - b.price
     if (sortBy === 'price-high') return b.price - a.price
@@ -383,7 +192,6 @@ function Loja() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-full"></div>
           <div className="absolute top-20 right-20 w-24 h-24 border-2 border-white rounded-full"></div>
-          <div className="absolute bottom-10 left-1/4 w-16 h-16 border-2 border-white rounded-full"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-4 text-center">
           <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium mb-6">
@@ -401,9 +209,9 @@ function Loja() {
       {/* Filters */}
       <section className="bg-white border-b sticky top-16 z-40 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             {/* Search */}
-            <div className="relative w-full md:w-64">
+            <div className="relative w-full lg:w-64">
               <input
                 type="text"
                 placeholder="Buscar produtos..."
@@ -417,12 +225,12 @@ function Loja() {
             </div>
 
             {/* Categories */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {categorias.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                     selectedCategory === cat.id
                       ? 'gradient-primary text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -433,22 +241,60 @@ function Loja() {
               ))}
             </div>
 
-            {/* Sort */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0 transition-colors"
-            >
-              <option value="popular">Mais Popular</option>
-              <option value="rating">Melhor Avaliado</option>
-              <option value="price-low">Menor Preço</option>
-              <option value="price-high">Maior Preço</option>
-            </select>
+            {/* Right Controls */}
+            <div className="flex items-center gap-3">
+              {/* Favorites Filter */}
+              <button
+                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                className={`flex items-center gap-1 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
+                  showFavoritesOnly
+                    ? 'bg-red-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <svg className="w-4 h-4" fill={showFavoritesOnly ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                {favoritesCount > 0 && <span>({favoritesCount})</span>}
+              </button>
+
+              {/* View Mode */}
+              <div className="flex bg-gray-100 rounded-xl p-1">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white shadow text-primary' : 'text-gray-500'}`}
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white shadow text-primary' : 'text-gray-500'}`}
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Sort */}
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="px-3 py-2 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0 transition-colors text-sm"
+              >
+                <option value="popular">Mais Popular</option>
+                <option value="rating">Melhor Nota</option>
+                <option value="price-low">Menor Preço</option>
+                <option value="price-high">Maior Preço</option>
+              </select>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Products Grid */}
+      {/* Products */}
       <section className="section-padding bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
@@ -457,11 +303,19 @@ function Loja() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((produto) => (
-              <ProdutoCard key={produto.id} produto={produto} />
-            ))}
-          </div>
+          {viewMode === 'grid' ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.map((produto) => (
+                <ProdutoCard key={produto.id} produto={produto} viewMode="grid" />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredProducts.map((produto) => (
+                <ProdutoCard key={produto.id} produto={produto} viewMode="list" />
+              ))}
+            </div>
+          )}
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-16">
@@ -485,7 +339,7 @@ function Loja() {
                 </svg>
               </div>
               <h3 className="font-heading font-bold text-primary mb-2">Frete Grátis</h3>
-              <p className="text-sm text-gray-600">Acima de R$ 200,00</p>
+              <p className="text-sm text-gray-600">Acima de R$ 200</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -512,7 +366,7 @@ function Loja() {
                 </svg>
               </div>
               <h3 className="font-heading font-bold text-primary mb-2">Suporte 24h</h3>
-              <p className="text-sm text-gray-600">Atendimento humanizado</p>
+              <p className="text-sm text-gray-600">WhatsApp</p>
             </div>
           </div>
         </div>
