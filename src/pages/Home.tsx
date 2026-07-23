@@ -1,9 +1,19 @@
+import Layout from '../layouts/Layout'
+import Hero from '../components/Hero'
+import AboutPreview from '../components/AboutPreview'
+import FeaturedProjects from '../components/FeaturedProjects'
+import NextEvents from '../components/NextEvents'
+import Newsletter from '../components/Newsletter'
+
 function Home() {
   return (
-    <div>
-      <h1>Casa do Mensageiro</h1>
-      <p>Página em construção...</p>
-    </div>
+    <Layout>
+      <Hero />
+      <AboutPreview />
+      <FeaturedProjects />
+      <NextEvents />
+      <Newsletter />
+    </Layout>
   )
 }
 
