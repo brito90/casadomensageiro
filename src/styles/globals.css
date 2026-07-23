@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #1A365D;
+    --color-secondary: #C9A96E;
+    --color-background: #F7F7F7;
+    --color-text: #2D2D2D;
+    --color-white: #FFFFFF;
+  }
+
+  body {
+    @apply bg-background text-text font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-primary;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold
+           hover:bg-opacity-90 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-primary px-6 py-3 rounded-lg font-semibold
+           hover:bg-opacity-90 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-300
+           hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .section-padding {
+    @apply py-16 px-4 md:px-8 lg:px-16;
+  }
+}
