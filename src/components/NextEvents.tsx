@@ -25,15 +25,6 @@ const events = [
   },
 ]
 
-function formatDate(dateString: string) {
-  const date = new Date(dateString + 'T00:00:00')
-  return date.toLocaleDateString('pt-BR', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  })
-}
-
 function NextEvents() {
   return (
     <section className="section-padding bg-white">
