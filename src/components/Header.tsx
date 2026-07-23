@@ -5,10 +5,10 @@ import CartSidebar from './CartSidebar'
 
 const navItems = [
   { name: 'Início', path: '/' },
+  { name: 'Projetos', path: '/projetos' },
   { name: 'Loja', path: '/loja' },
   { name: 'Olojá', path: '/oloja' },
   { name: 'Festas', path: '/festas' },
-  { name: 'Búzios', path: '/buzios' },
   { name: 'Blog', path: '/blog' },
 ]
 

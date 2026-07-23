@@ -7,6 +7,7 @@ import Buzios from './pages/Buzios'
 import PaiDeSanto from './pages/PaiDeSanto'
 import Loja from './pages/Loja'
 import Oloja from './pages/Oloja'
+import Projetos from './pages/Projetos'
 import Produto from './pages/Produto'
 import Checkout from './pages/Checkout'
 import Quiz from './pages/Quiz'
@@ -26,6 +27,7 @@ function App() {
           <Route path="/pai-de-santo" element={<PaiDeSanto />} />
           <Route path="/loja" element={<Loja />} />
           <Route path="/oloja" element={<Oloja />} />
+          <Route path="/projetos" element={<Projetos />} />
           <Route path="/produto/:id" element={<Produto />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/quiz" element={<Quiz />} />
