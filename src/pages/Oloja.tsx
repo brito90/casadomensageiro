@@ -88,39 +88,80 @@ function Particles() {
 function ServiceCard({ servico }: { servico: typeof servicos[0] }) {
   const { ref, handleMouseMove, handleMouseLeave } = useTilt<HTMLDivElement>({ maxTilt: 10, scale: 1.03 })
   const [isHovered, setIsHovered] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  const handleMouseMoveLocal = (e: React.MouseEvent<HTMLDivElement>) => {
+    handleMouseMove(e)
+    const rect = e.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
 
   return (
     <div
       ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMoveLocal}
+      onMouseLeave={() => { handleMouseLeave(); setIsHovered(false) }}
       onMouseEnter={() => setIsHovered(true)}
       className="bg-gray-800 rounded-2xl p-6 cursor-pointer hover:bg-gray-750 transition-all duration-300 hover:shadow-xl hover:shadow-red-500/20 relative overflow-hidden group"
       style={{ transformStyle: 'preserve-3d' }}
     >
+      {/* Shine Effect on Hover */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          background: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, rgba(239, 68, 68, 0.4), transparent 70%)`,
+        }}
+      />
+
+      {/* Border Glow */}
+      <div className={`absolute inset-0 rounded-2xl transition-all duration-500 pointer-events-none ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.5), rgba(249, 115, 22, 0.5))',
+          padding: '2px',
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+
       {/* Animated Background */}
       <div className={`absolute inset-0 bg-gradient-to-br from-red-600/10 to-orange-600/10 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+      {/* Sparkle Effect */}
+      {isHovered && (
+        <>
+          <div className="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-ping" />
+          <div className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-orange-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }} />
+          <div className="absolute top-1/2 right-8 w-1 h-1 bg-red-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }} />
+        </>
+      )}
       
       <div className="relative">
-        <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+        <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform group-hover:shadow-lg group-hover:shadow-red-500/50">
           <span className="text-3xl">{servico.icon}</span>
         </div>
-        <h3 className="font-heading font-bold text-white text-xl mb-2">{servico.title}</h3>
+        <h3 className="font-heading font-bold text-white text-xl mb-2 group-hover:text-red-300 transition-colors">{servico.title}</h3>
         <p className="text-gray-400 text-sm mb-4">{servico.description}</p>
         
         <div className="flex items-center justify-between border-t border-gray-700 pt-4">
           <div>
-            <span className="text-2xl font-bold text-red-400">R$ {servico.price}</span>
+            <span className="text-2xl font-bold text-red-400 group-hover:text-red-300 transition-colors">R$ {servico.price}</span>
             <span className="text-gray-500 text-sm ml-2">• {servico.duration}</span>
           </div>
-          <span className="text-gray-500 text-sm group-hover:text-red-400 transition-colors">
-            Saiba mais →
+          <span className="text-gray-500 text-sm group-hover:text-red-400 transition-colors flex items-center gap-1">
+            Saiba mais 
+            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </span>
         </div>
       </div>
 
-      {/* Hover Effect */}
-      <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-red-500/10 rounded-full blur-xl transition-all duration-500 group-hover:w-32 group-hover:h-32" />
+      {/* Bottom Glow */}
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-red-500/30 rounded-full blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
     </div>
   )
 }
