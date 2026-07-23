@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
 interface CartSidebarProps {
@@ -120,9 +121,13 @@ function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   Frete grátis!
                 </div>
               )}
-              <button className="w-full btn-primary text-lg py-4">
+              <Link
+                to="/checkout"
+                onClick={onClose}
+                className="w-full btn-primary text-lg py-4 block text-center"
+              >
                 Finalizar Compra
-              </button>
+              </Link>
               <button
                 onClick={clearCart}
                 className="w-full text-center text-gray-500 hover:text-red-500 text-sm transition-colors"
