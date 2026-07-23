@@ -13,6 +13,7 @@ import Produto from './pages/Produto'
 import Checkout from './pages/Checkout'
 import Quiz from './pages/Quiz'
 import Blog from './pages/Blog'
+import Contato from './pages/Contato'
 import ChatWidget from './components/ChatWidget'
 import DarkMode from './components/DarkMode'
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/contato" element={<Contato />} />
         </Routes>
       </Router>
       <ChatWidget />
