@@ -134,4 +134,52 @@
   .hover-glow:hover {
     box-shadow: 0 0 40px rgba(220, 38, 38, 0.5);
   }
+
+  .corkscrew-section {
+    @apply relative overflow-hidden;
+    transform: skewY(-2deg);
+  }
+
+  .corkscrew-section > * {
+    transform: skewY(2deg);
+  }
+
+  .corkscrew-dramatic {
+    transform: skewY(-4deg);
+  }
+
+  .corkscrew-dramatic > * {
+    transform: skewY(4deg);
+  }
+
+  .corkscrew-subtle {
+    transform: skewY(-1deg);
+  }
+
+  .corkscrew-subtle > * {
+    transform: skewY(1deg);
+  }
+
+  .diagonal-cut {
+    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 92%);
+  }
+
+  .diagonal-cut-reverse {
+    clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%);
+  }
+
+  .wave-bottom {
+    position: relative;
+  }
+
+  .wave-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23FFFBFB' d='M0,64 L48,58.7 C96,53.3,192,42.7,288,48 C384,53.3,480,74.7,576,80 C672,85.3,768,74.7,864,64 C960,53.3,1056,42.7,1152,48 C1248,53.3,1344,74.7,1392,85.3 L1440,96 L1440,120 L0,120 Z'/%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+  }
 }
