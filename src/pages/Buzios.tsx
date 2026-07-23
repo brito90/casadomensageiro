@@ -1,5 +1,6 @@
 import Layout from '../layouts/Layout'
 import { useState } from 'react'
+import { useTilt } from '../utils/useTilt'
 
 const horariosDisponiveis = [
   { id: 1, time: '09:00', available: true },
@@ -30,6 +31,7 @@ const tiposConsulta = [
     duration: '30 min',
     description: 'Consulta rápida para perguntas específicas',
     popular: false,
+    icon: '🔮',
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ const tiposConsulta = [
     duration: '1 hora',
     description: 'Análise completa do seu Ori com todos os Orixás',
     popular: true,
+    icon: '✨',
   },
   {
     id: 3,
@@ -46,8 +49,70 @@ const tiposConsulta = [
     duration: '1h30',
     description: 'Consulta + despacho personalizado',
     popular: false,
+    icon: '🕯️',
   },
 ]
+
+function ConsultaCard({ tipo, selected, onSelect }: { tipo: typeof tiposConsulta[0], selected: boolean, onSelect: () => void }) {
+  const { ref, handleMouseMove, handleMouseLeave } = useTilt({ maxTilt: 8, scale: 1.02 })
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onSelect}
+      className={`relative bg-white rounded-2xl p-6 cursor-pointer transition-all duration-300 ${
+        selected
+          ? 'ring-4 ring-primary shadow-2xl'
+          : 'shadow-lg hover:shadow-xl'
+      }`}
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      {tipo.popular && (
+        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+          <span className="bg-accent text-primary-900 text-xs font-bold px-4 py-1 rounded-full shadow-lg">
+            MAIS POPULAR
+          </span>
+        </div>
+      )}
+      
+      <div 
+        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
+          selected ? 'gradient-primary' : 'bg-primary-50'
+        }`}
+        style={{ transform: 'translateZ(20px)' }}
+      >
+        <span className="text-2xl">{tipo.icon}</span>
+      </div>
+
+      <h3 
+        className="font-heading font-bold text-xl text-primary mb-2"
+        style={{ transform: 'translateZ(15px)' }}
+      >
+        {tipo.name}
+      </h3>
+      <p 
+        className="text-gray-600 text-sm mb-4"
+        style={{ transform: 'translateZ(10px)' }}
+      >
+        {tipo.description}
+      </p>
+
+      <div 
+        className="flex items-center justify-between"
+        style={{ transform: 'translateZ(5px)' }}
+      >
+        <span className="text-2xl font-bold text-primary">{tipo.price}</span>
+        <span className="text-sm text-gray-500">{tipo.duration}</span>
+      </div>
+
+      <div className={`absolute inset-0 rounded-2xl border-4 transition-all duration-300 ${
+        selected ? 'border-primary' : 'border-transparent'
+      }`}></div>
+    </div>
+  )
+}
 
 function Buzios() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null)
@@ -104,47 +169,12 @@ function Buzios() {
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {tiposConsulta.map((tipo) => (
-              <div
+              <ConsultaCard
                 key={tipo.id}
-                className={`relative bg-white rounded-2xl p-6 cursor-pointer transition-all duration-300 ${
-                  selectedType === tipo.id
-                    ? 'ring-4 ring-primary shadow-2xl -translate-y-2'
-                    : 'shadow-lg hover:shadow-xl hover:-translate-y-1'
-                }`}
-                onClick={() => setSelectedType(tipo.id)}
-              >
-                {tipo.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-accent text-primary-900 text-xs font-bold px-4 py-1 rounded-full shadow-lg">
-                      MAIS POPULAR
-                    </span>
-                  </div>
-                )}
-                
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
-                  selectedType === tipo.id ? 'gradient-primary' : 'bg-primary-50'
-                }`}>
-                  <svg className={`w-8 h-8 ${selectedType === tipo.id ? 'text-white' : 'text-primary'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-
-                <h3 className="font-heading font-bold text-xl text-primary mb-2">
-                  {tipo.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  {tipo.description}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-primary">{tipo.price}</span>
-                  <span className="text-sm text-gray-500">{tipo.duration}</span>
-                </div>
-
-                <div className={`absolute inset-0 rounded-2xl border-4 transition-all duration-300 ${
-                  selectedType === tipo.id ? 'border-primary' : 'border-transparent'
-                }`}></div>
-              </div>
+                tipo={tipo}
+                selected={selectedType === tipo.id}
+                onSelect={() => setSelectedType(tipo.id)}
+              />
             ))}
           </div>
         </div>

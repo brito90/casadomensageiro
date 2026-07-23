@@ -1,3 +1,45 @@
+import { useTilt } from '../utils/useTilt'
+
+const orixas = [
+  { name: 'Ogum', emoji: '⚔️', description: 'Guerreiro e protetor', gradient: 'from-primary to-primary-700' },
+  { name: 'Oxum', emoji: '💧', description: 'Águas doces e fertilidade', gradient: 'from-cyan-400 to-blue-500' },
+  { name: 'Xangô', emoji: '🪓', description: 'Justiça e poder', gradient: 'from-red-500 to-orange-500' },
+  { name: 'Iemanjá', emoji: '🌊', description: 'Rainha do mar', gradient: 'from-blue-500 to-indigo-600' },
+]
+
+function OrixaCard({ orixa }: { orixa: typeof orixas[0] }) {
+  const { ref, handleMouseMove, handleMouseLeave } = useTilt({ maxTilt: 15, scale: 1.1 })
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group"
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      <div 
+        className={`w-14 h-14 bg-gradient-to-br ${orixa.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
+        style={{ transform: 'translateZ(25px)' }}
+      >
+        <span className="text-2xl">{orixa.emoji}</span>
+      </div>
+      <h3 
+        className="font-heading font-bold text-primary mb-2"
+        style={{ transform: 'translateZ(15px)' }}
+      >
+        {orixa.name}
+      </h3>
+      <p 
+        className="text-sm text-gray-600"
+        style={{ transform: 'translateZ(10px)' }}
+      >
+        {orixa.description}
+      </p>
+    </div>
+  )
+}
+
 function AboutPreview() {
   return (
     <section className="section-padding bg-white">
@@ -38,34 +80,9 @@ function AboutPreview() {
           <div className="relative">
             <div className="gradient-secondary rounded-3xl p-8 md:p-12">
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
-                  <div className="w-14 h-14 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-2xl">⚔️</span>
-                  </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Ogum</h3>
-                  <p className="text-sm text-gray-600">Guerreiro e protetor</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-2xl">💧</span>
-                  </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Oxum</h3>
-                  <p className="text-sm text-gray-600">Águas doces e fertilidade</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-2xl">🪓</span>
-                  </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Xangô</h3>
-                  <p className="text-sm text-gray-600">Justiça e poder</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-2xl">🌊</span>
-                  </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Iemanjá</h3>
-                  <p className="text-sm text-gray-600">Rainha do mar</p>
-                </div>
+                {orixas.map((orixa) => (
+                  <OrixaCard key={orixa.name} orixa={orixa} />
+                ))}
               </div>
             </div>
           </div>

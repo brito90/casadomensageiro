@@ -1,3 +1,5 @@
+import { useTilt } from '../utils/useTilt'
+
 const events = [
   {
     id: 1,
@@ -40,6 +42,64 @@ function formatDate(dateString: string) {
   })
 }
 
+function EventCard({ event }: { event: typeof events[0] }) {
+  const { ref, handleMouseMove, handleMouseLeave } = useTilt<HTMLAnchorElement>({ maxTilt: 10, scale: 1.02 })
+
+  return (
+    <a
+      ref={ref}
+      href="/festas"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow group block"
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      <div className={`h-32 bg-gradient-to-br ${event.color} relative`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span 
+            className="text-white text-5xl font-heading font-bold opacity-30 group-hover:scale-110 transition-transform"
+            style={{ transform: 'translateZ(15px)' }}
+          >
+            {event.orixa.charAt(0)}
+          </span>
+        </div>
+        <div className="absolute bottom-3 left-3" style={{ transform: 'translateZ(10px)' }}>
+          <span className="bg-white text-primary text-xs px-3 py-1 rounded-full font-bold shadow-lg">
+            {event.orixa}
+          </span>
+        </div>
+      </div>
+      <div className="p-5" style={{ transform: 'translateZ(5px)' }}>
+        <h3 className="font-heading font-bold text-lg text-primary mb-2">
+          {event.title}
+        </h3>
+        <div className="space-y-2">
+          <div className="flex items-center text-sm text-gray-600">
+            <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {formatDate(event.date)}
+          </div>
+          <div className="flex items-center text-sm text-gray-600">
+            <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {event.time}
+          </div>
+        </div>
+        <div className="mt-4">
+          <span className="text-primary font-semibold text-sm group-hover:underline inline-flex items-center gap-1">
+            Ver detalhes
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
+
 function NextEvents() {
   return (
     <section className="section-padding bg-white">
@@ -58,51 +118,7 @@ function NextEvents() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {events.map((event) => (
-            <a
-              key={event.id}
-              href="/festas"
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group block"
-            >
-              <div className={`h-32 bg-gradient-to-br ${event.color} relative`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-5xl font-heading font-bold opacity-30 group-hover:scale-110 transition-transform">
-                    {event.orixa.charAt(0)}
-                  </span>
-                </div>
-                <div className="absolute bottom-3 left-3">
-                  <span className="bg-white text-primary text-xs px-3 py-1 rounded-full font-bold shadow-lg">
-                    {event.orixa}
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="font-heading font-bold text-lg text-primary mb-2">
-                  {event.title}
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {formatDate(event.date)}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {event.time}
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <span className="text-primary font-semibold text-sm group-hover:underline inline-flex items-center gap-1">
-                    Ver detalhes
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </a>
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
 
