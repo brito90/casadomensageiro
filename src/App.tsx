@@ -8,6 +8,7 @@ import PaiDeSanto from './pages/PaiDeSanto'
 import Loja from './pages/Loja'
 import Oloja from './pages/Oloja'
 import Projetos from './pages/Projetos'
+import Podcasts from './pages/Podcasts'
 import Produto from './pages/Produto'
 import Checkout from './pages/Checkout'
 import Quiz from './pages/Quiz'
@@ -28,6 +29,7 @@ function App() {
           <Route path="/loja" element={<Loja />} />
           <Route path="/oloja" element={<Oloja />} />
           <Route path="/projetos" element={<Projetos />} />
+          <Route path="/podcasts" element={<Podcasts />} />
           <Route path="/produto/:id" element={<Produto />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/quiz" element={<Quiz />} />
