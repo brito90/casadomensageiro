@@ -5,69 +5,66 @@ function AboutPreview() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="space-y-6">
+            <div className="inline-block bg-primary-50 px-4 py-2 rounded-full text-primary text-sm font-medium">
+              🙏 Nossa História
+            </div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary">
               Sobre a Casa do Mensageiro
             </h2>
-            <p className="text-lg text-text leading-relaxed">
-              Somos uma comunidade de fé que acredita no poder da espiritualidade
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Somos um terreiro de Candomblé que acredita no poder da espiritualidade
               para transformar vidas. Nosso espaço é aberto para todos que buscam
               paz, acolhimento e crescimento espiritual.
             </p>
-            <p className="text-lg text-text leading-relaxed">
-              Através de projetos culturais, sociais e educacionais, trabalhamos
-              para fazer a diferença na vida das pessoas, compartilhando amor
-              e esperança.
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Através de rituais, festas e consultas espirituais, trabalhamos
+              para fazer a diferença na vida das pessoas, compartilhando o axé
+              dos nossos Orixás.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="btn-primary">
+              <a href="/sobre" className="btn-primary inline-flex items-center gap-2">
                 Saiba Mais
-              </button>
-              <button className="border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold
-                               hover:bg-primary hover:text-white transition-all duration-200">
-                Nossos Valores
-              </button>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a href="/festas" className="btn-secondary inline-flex items-center gap-2">
+                Ver Festas
+              </a>
             </div>
           </div>
 
           {/* Image/Icon Area */}
           <div className="relative">
-            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl p-8 md:p-12">
+            <div className="gradient-secondary rounded-3xl p-8 md:p-12">
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-md text-center">
-                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
+                  <div className="w-14 h-14 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <span className="text-2xl">⚔️</span>
                   </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Comunidade</h3>
-                  <p className="text-sm text-gray-600">Pessoas unidas pela fé</p>
+                  <h3 className="font-heading font-bold text-primary mb-2">Ogum</h3>
+                  <p className="text-sm text-gray-600">Guerreiro e protetor</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-md text-center">
-                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
+                  <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <span className="text-2xl">💧</span>
                   </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Acolhimento</h3>
-                  <p className="text-sm text-gray-600">Espaço para todos</p>
+                  <h3 className="font-heading font-bold text-primary mb-2">Oxum</h3>
+                  <p className="text-sm text-gray-600">Águas doces e fertilidade</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-md text-center">
-                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
+                  <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <span className="text-2xl">🪓</span>
                   </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Ensino</h3>
-                  <p className="text-sm text-gray-600">Crescimento espiritual</p>
+                  <h3 className="font-heading font-bold text-primary mb-2">Xangô</h3>
+                  <p className="text-sm text-gray-600">Justiça e poder</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-md text-center">
-                  <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
+                <div className="bg-white rounded-2xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow group">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <span className="text-2xl">🌊</span>
                   </div>
-                  <h3 className="font-heading font-bold text-primary mb-2">Impacto</h3>
-                  <p className="text-sm text-gray-600">Transformando vidas</p>
+                  <h3 className="font-heading font-bold text-primary mb-2">Iemanjá</h3>
+                  <p className="text-sm text-gray-600">Rainha do mar</p>
                 </div>
               </div>
             </div>

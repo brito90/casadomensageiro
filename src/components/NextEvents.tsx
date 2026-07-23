@@ -1,99 +1,118 @@
 const events = [
   {
     id: 1,
-    title: 'Culto de Domingo',
-    date: '2026-07-27',
-    time: '10:00',
-    location: 'Auditório Principal',
-    description: 'Nosso culto semanal com louvor, palavra e comunhão.',
+    title: 'Festa de Iemanjá',
+    date: '2026-02-02',
+    time: '14:00',
+    location: 'Praia do Porto',
+    description: 'Homenagem anual à Rainha do Mar. Oferecimento de flores e presentes nas águas.',
+    orixa: 'Iemanjá',
+    color: 'from-blue-500 to-cyan-400',
   },
   {
     id: 2,
-    title: 'Workshop: Meditação e Paz',
-    date: '2026-07-30',
-    time: '19:00',
-    location: 'Sala de Encontros',
-    description: 'Aprenda técnicas de meditação para encontrar paz interior.',
+    title: 'Festa de Xangô',
+    date: '2026-06-24',
+    time: '16:00',
+    location: 'Terreiro Principal',
+    description: 'Celebração do Orixá da Justiça. Toques especiais e comidas de Xangô.',
+    orixa: 'Xangô',
+    color: 'from-red-600 to-orange-500',
   },
   {
     id: 3,
-    title: 'Sarau Cultural',
-    date: '2026-08-02',
-    time: '18:30',
-    location: 'Área Externa',
-    description: 'Noite de música, poesia e arte com a comunidade.',
+    title: 'Festa de Oxum',
+    date: '2026-08-08',
+    time: '15:00',
+    location: 'Fonte da Água',
+    description: 'Festa das águas doces. Flores amarelas e oferendas para a Mãe de Oxum.',
+    orixa: 'Oxum',
+    color: 'from-yellow-400 to-amber-500',
   },
 ]
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString + 'T00:00:00')
+  return date.toLocaleDateString('pt-BR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  })
+}
 
 function NextEvents() {
   return (
     <section className="section-padding bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-block bg-primary/10 px-4 py-2 rounded-full text-primary text-sm font-medium mb-4">
+            📅 Calendário
+          </div>
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-4">
-            Próximos Eventos
+            Próximas Festas
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Participe dos nossos encontros e fortaleça sua conexão espiritual.
+            Participe das celebrações e fortaleça sua conexão com os Orixás.
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {events.map((event) => (
-            <article
+            <a
               key={event.id}
-              className="bg-background rounded-xl p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start hover:shadow-lg transition-shadow duration-300"
+              href="/festas"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group block"
             >
-              {/* Date Badge */}
-              <div className="flex-shrink-0 bg-primary text-white rounded-xl p-4 text-center min-w-[100px]">
-                <div className="text-3xl font-bold">
-                  {new Date(event.date + 'T00:00:00').getDate()}
+              <div className={`h-32 bg-gradient-to-br ${event.color} relative`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white text-5xl font-heading font-bold opacity-30 group-hover:scale-110 transition-transform">
+                    {event.orixa.charAt(0)}
+                  </span>
                 </div>
-                <div className="text-sm uppercase">
-                  {new Date(event.date + 'T00:00:00').toLocaleDateString('pt-BR', { month: 'short' })}
+                <div className="absolute bottom-3 left-3">
+                  <span className="bg-white text-primary text-xs px-3 py-1 rounded-full font-bold shadow-lg">
+                    {event.orixa}
+                  </span>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="flex-grow space-y-2">
-                <h3 className="font-heading font-bold text-xl text-primary">
+              <div className="p-5">
+                <h3 className="font-heading font-bold text-lg text-primary mb-2">
                   {event.title}
                 </h3>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="space-y-2">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    {formatDate(event.date)}
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="w-4 h-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {event.time}
-                  </span>
-                  <span className="flex items-center gap-1">
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <span className="text-primary font-semibold text-sm group-hover:underline inline-flex items-center gap-1">
+                    Ver detalhes
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                    {event.location}
                   </span>
                 </div>
-                <p className="text-gray-600">
-                  {event.description}
-                </p>
               </div>
-
-              {/* Action */}
-              <div className="flex-shrink-0">
-                <button className="btn-secondary text-sm">
-                  Inscreva-se
-                </button>
-              </div>
-            </article>
+            </a>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <button className="border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold
-                           hover:bg-primary hover:text-white transition-all duration-200">
-            Ver Calendário Completo
-          </button>
+        <div className="text-center mt-10">
+          <a href="/festas" className="btn-primary inline-flex items-center gap-2">
+            Ver Todas as Festas
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

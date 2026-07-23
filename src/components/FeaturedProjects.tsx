@@ -1,73 +1,77 @@
 const projects = [
   {
     id: 1,
-    title: 'Projeto Esperança',
-    description: 'Ajuda humanitária para comunidades carentes, distribuindo alimentos e utensílios básicos.',
-    image: '/assets/images/project-1.jpg',
-    category: 'Social',
+    title: 'Jogos de Búzios',
+    description: 'Consultas espirituais para orientação e solução de problemas através dos Orixás.',
+    icon: '🔮',
+    category: 'Espiritual',
+    link: '/buzios',
   },
   {
     id: 2,
-    title: 'Cultura & Fé',
-    description: 'Eventos culturais que promovem a espiritualidade através da arte e música.',
-    image: '/assets/images/project-2.jpg',
-    category: 'Cultural',
+    title: 'Festas dos Orixás',
+    description: 'Celebrações tradicionais com toques, cantos e oferendas aos Orixás.',
+    icon: '🎉',
+    category: 'Celebração',
+    link: '/festas',
   },
   {
     id: 3,
-    title: 'Educação para Todos',
-    description: 'Cursos e workshops para desenvolvimento pessoal e espiritual.',
-    image: '/assets/images/project-3.jpg',
-    category: 'Educacional',
+    title: 'Biblioteca Sagrada',
+    description: 'Acervo histórico de cantos, toques e vídeos antigos do terreiro.',
+    icon: '📚',
+    category: 'Cultura',
+    link: '/biblioteca',
   },
 ]
 
 function FeaturedProjects() {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding gradient-secondary">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-block bg-primary/10 px-4 py-2 rounded-full text-primary text-sm font-medium mb-4">
+            ✨ Nossos Serviços
+          </div>
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-4">
-            Projetos em Destaque
+            Conheça Nossos Serviços
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Conheça nossas iniciativas que transformam vidas e fortalecem a comunidade.
+            Oferecemos diversos serviços espirituais para fortalecer sua fé e conexão com os Orixás.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <article key={project.id} className="card group cursor-pointer">
-              <div className="relative overflow-hidden rounded-lg mb-4">
-                <div className="aspect-video bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <span className="text-white font-heading text-lg">{project.category}</span>
-                </div>
-                <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
+            <a
+              key={project.id}
+              href={project.link}
+              className="bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group block"
+            >
+              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="text-3xl">{project.icon}</span>
               </div>
               <div className="space-y-3">
-                <span className="inline-block px-3 py-1 bg-secondary bg-opacity-20 text-secondary text-sm font-medium rounded-full">
+                <span className="inline-block px-3 py-1 bg-primary-50 text-primary text-xs font-semibold rounded-full">
                   {project.category}
                 </span>
-                <h3 className="font-heading font-bold text-xl text-primary group-hover:text-secondary transition-colors">
+                <h3 className="font-heading font-bold text-xl text-primary group-hover:text-primary-600 transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
                   {project.description}
                 </p>
                 <div className="pt-2">
-                  <span className="text-secondary font-semibold group-hover:underline">
-                    Saiba mais →
+                  <span className="text-primary font-semibold group-hover:underline inline-flex items-center gap-1">
+                    Saiba mais
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </span>
                 </div>
               </div>
-            </article>
+            </a>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <button className="btn-primary">
-            Ver Todos os Projetos
-          </button>
         </div>
       </div>
     </section>

@@ -7,11 +7,11 @@ const footerLinks = {
     { name: 'Equipe', path: '/sobre#equipe' },
     { name: 'História', path: '/sobre#historia' },
   ],
-  projetos: [
-    { name: 'Todos os Projetos', path: '/projetos' },
-    { name: 'Projeto Esperança', path: '/projetos/1' },
-    { name: 'Cultura & Fé', path: '/projetos/2' },
-    { name: 'Educação para Todos', path: '/projetos/3' },
+  servicos: [
+    { name: 'Jogos de Búzios', path: '/buzios' },
+    { name: 'Pai de Santo', path: '/pai-de-santo' },
+    { name: 'Festas', path: '/festas' },
+    { name: 'Biblioteca', path: '/biblioteca' },
   ],
   suporte: [
     { name: 'Contato', path: '/contato' },
@@ -29,33 +29,33 @@ const socialLinks = [
 
 function Footer() {
   return (
-    <footer className="bg-primary text-white">
+    <footer className="gradient-primary text-white">
       <div className="max-w-6xl mx-auto section-padding">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                 <span className="text-primary font-heading font-bold text-xl">CM</span>
               </div>
-              <span className="font-heading font-bold text-lg">
+              <span className="font-heading font-bold text-xl">
                 Casa do Mensageiro
               </span>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Um espaço de fé, acolhimento e transformação para todos que buscam paz espiritual.
+            <p className="text-white/70 text-sm leading-relaxed">
+              Um terreiro de fé, tradição e axé. Acolhimento para todos que buscam a paz dos Orixás.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Links Institucional */}
           <div>
-            <h3 className="font-heading font-bold text-lg mb-4">Institucional</h3>
+            <h3 className="font-heading font-bold text-lg mb-4 text-accent">Institucional</h3>
             <ul className="space-y-2">
               {footerLinks.institucional.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-secondary transition-colors text-sm"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -64,14 +64,15 @@ function Footer() {
             </ul>
           </div>
 
+          {/* Links Serviços */}
           <div>
-            <h3 className="font-heading font-bold text-lg mb-4">Projetos</h3>
+            <h3 className="font-heading font-bold text-lg mb-4 text-accent">Serviços</h3>
             <ul className="space-y-2">
-              {footerLinks.projetos.map((link) => (
+              {footerLinks.servicos.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-secondary transition-colors text-sm"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -80,14 +81,15 @@ function Footer() {
             </ul>
           </div>
 
+          {/* Links Suporte */}
           <div>
-            <h3 className="font-heading font-bold text-lg mb-4">Suporte</h3>
+            <h3 className="font-heading font-bold text-lg mb-4 text-accent">Suporte</h3>
             <ul className="space-y-2">
               {footerLinks.suporte.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-secondary transition-colors text-sm"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -98,8 +100,8 @@ function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/60 text-sm">
             © 2026 Casa do Mensageiro. Todos os direitos reservados.
           </p>
 
@@ -109,8 +111,8 @@ function Footer() {
               <a
                 key={social.name}
                 href="#"
-                className="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center
-                         hover:bg-secondary transition-colors duration-200"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center
+                         hover:bg-white/20 transition-colors duration-200"
                 aria-label={social.name}
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
