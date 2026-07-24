@@ -16,6 +16,7 @@ import Blog from './pages/Blog'
 import Contato from './pages/Contato'
 import Visitas from './pages/Visitas'
 import Eventos from './pages/Eventos'
+import ContatoTemplo from './pages/ContatoTemplo'
 import ChatWidget from './components/ChatWidget'
 import DarkMode from './components/DarkMode'
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/contato" element={<Contato />} />
           <Route path="/visitas" element={<Visitas />} />
           <Route path="/eventos" element={<Eventos />} />
+          <Route path="/contato-templo" element={<ContatoTemplo />} />
         </Routes>
       </Router>
       <ChatWidget />

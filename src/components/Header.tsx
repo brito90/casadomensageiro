@@ -9,7 +9,7 @@ const navItems = [
   { name: 'Projetos', path: '/projetos' },
   { name: 'Festas', path: '/festas' },
   { name: 'Loja', path: '/loja' },
-  { name: 'Contato', path: '/contato' },
+  { name: 'Contato Templo', path: '/contato-templo' },
 ]
 
 function Header() {
