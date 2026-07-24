@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import { Card3D, Button3D, Icon3D } from '../utils/useTilt3D'
 
 const horarios = [
   { day: 'Segunda', hours: 'Fechado', available: false },
@@ -68,12 +69,16 @@ function Visitas() {
             Sejamos bem-vindos! Visite nosso templo sagrado e conheça a tradição e a fé que moves esta comunidade.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#agendar" className="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center gap-2">
-              Agendar Visita
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            <a href="#agendar">
+              <Button3D variant="accent" className="text-lg">
+                Agendar Visita
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              </Button3D>
             </a>
-            <a href="#tour" className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold border-2 border-white/30 hover:bg-white/30 transition-all duration-300">
-              Conhecer o Tour
+            <a href="#tour">
+              <Button3D variant="secondary" className="text-lg">
+                Conhecer o Tour
+              </Button3D>
             </a>
           </div>
         </div>
@@ -83,27 +88,27 @@ function Visitas() {
       <section className="py-12 bg-white border-b">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-6 rounded-2xl bg-primary-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Card3D className="text-center p-6 rounded-2xl bg-primary-50">
+              <Icon3D className="gradient-primary shadow-lg mx-auto mb-4">
                 <span className="text-2xl">📍</span>
-              </div>
+              </Icon3D>
               <h3 className="font-heading font-bold text-primary mb-2">Localização</h3>
               <p className="text-gray-600 text-sm">Rua da Fé, 123<br />Centro - São Paulo/SP</p>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-primary-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+            </Card3D>
+            <Card3D className="text-center p-6 rounded-2xl bg-primary-50">
+              <Icon3D className="gradient-primary shadow-lg mx-auto mb-4">
                 <span className="text-2xl">🕐</span>
-              </div>
+              </Icon3D>
               <h3 className="font-heading font-bold text-primary mb-2">Horários</h3>
               <p className="text-gray-600 text-sm">Terça a Sábado<br />9h às 17h</p>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-primary-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+            </Card3D>
+            <Card3D className="text-center p-6 rounded-2xl bg-primary-50">
+              <Icon3D className="gradient-primary shadow-lg mx-auto mb-4">
                 <span className="text-2xl">💰</span>
-              </div>
+              </Icon3D>
               <h3 className="font-heading font-bold text-primary mb-2">Valor</h3>
               <p className="text-gray-600 text-sm">Entrada gratuita<br />Doações bem-vindas</p>
-            </div>
+            </Card3D>
           </div>
         </div>
       </section>
@@ -145,14 +150,14 @@ function Visitas() {
             <div className="space-y-8">
               {tourSteps.map((step, i) => (
                 <div key={i} className="flex gap-6 items-start">
-                  <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg relative z-10">
+                  <Icon3D className="gradient-primary shadow-lg flex-shrink-0 relative z-10">
                     <span className="text-2xl">{step.icon}</span>
-                  </div>
-                  <div className="bg-gray-50 rounded-2xl p-6 flex-1 hover:shadow-md transition-shadow">
+                  </Icon3D>
+                  <Card3D className="bg-gray-50 rounded-2xl p-6 flex-1">
                     <div className="text-sm text-primary font-semibold mb-1">Passo {step.step}</div>
                     <h3 className="font-heading font-bold text-primary text-xl mb-2">{step.title}</h3>
                     <p className="text-gray-600">{step.description}</p>
-                  </div>
+                  </Card3D>
                 </div>
               ))}
             </div>
@@ -169,11 +174,11 @@ function Visitas() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {regras.map((regra, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow">
+              <Card3D key={i} className="bg-white rounded-2xl p-6">
                 <span className="text-4xl mb-4 block">{regra.icon}</span>
                 <h3 className="font-heading font-bold text-primary text-lg mb-2">{regra.title}</h3>
                 <p className="text-gray-600 text-sm">{regra.description}</p>
-              </div>
+              </Card3D>
             ))}
           </div>
         </div>
@@ -236,9 +241,9 @@ function Visitas() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Observações</label>
                 <textarea rows={3} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0 resize-none" placeholder="Alguma informação adicional..." />
               </div>
-              <button type="submit" className="w-full btn-primary py-4 text-lg">
+              <Button3D variant="primary" className="w-full py-4 text-lg">
                 Confirmar Agendamento
-              </button>
+              </Button3D>
             </form>
           )}
         </div>
