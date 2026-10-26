@@ -1,4 +1,5 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useState, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
@@ -86,6 +87,7 @@ function Loja() {
 
   return (
     <Layout>
+      <Seo title="Loja" />
       {/* Hero Banner */}
       <div className="pt-24 pb-8 px-4 max-w-7xl mx-auto">
         <HeroBanner />

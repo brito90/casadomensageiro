@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { Card3D, Button3D, Icon3D } from '../utils/useTilt3D'
 
 const faq = [
@@ -250,6 +251,7 @@ function SocialSection() {
 function Contato() {
   return (
     <Layout>
+      <Seo title="Contato" />
       <HeroSection />
       <ContactCards />
       <ContactForm />

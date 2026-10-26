@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { Card3D, Button3D } from '../utils/useTilt3D'
 
 const faqCategories = [
@@ -45,6 +46,7 @@ function Faq() {
 
   return (
     <Layout>
+      <Seo title="Faq" />
       {/* Hero */}
       <section className="relative pt-24 pb-16 min-h-[40vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-600 to-primary-800">

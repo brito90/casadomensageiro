@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useTilt } from '../utils/useTilt'
 
 const servicos = [
@@ -315,6 +316,7 @@ function Oloja() {
 
   return (
     <Layout>
+      <Seo title="Oloja" />
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />

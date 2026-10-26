@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { Card3D, Button3D, Icon3D } from '../utils/useTilt3D'
 
 const horarios = [
@@ -47,6 +48,7 @@ function Visitas() {
 
   return (
     <Layout>
+      <Seo title="Visitas" />
       {/* Hero */}
       <section className="relative pt-24 pb-16 min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-600 to-primary-800">

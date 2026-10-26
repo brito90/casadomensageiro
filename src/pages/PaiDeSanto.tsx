@@ -1,4 +1,5 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useState } from 'react'
 import { useTilt } from '../utils/useTilt'
 
@@ -110,6 +111,7 @@ function PaiDeSanto() {
 
   return (
     <Layout>
+      <Seo title="PaiDeSanto" />
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 overflow-hidden">
         <div className="absolute inset-0 gradient-hero"></div>

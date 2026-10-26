@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 const posts = [
   { id: 1, title: 'A Importância do Jogo de Búzios na Vida Espiritual', excerpt: 'Descubra como o jogo de búzios pode guiar suas decisões e trazer clareza.', category: 'Espiritualidade', date: '20 Jul 2026', readTime: '5 min', featured: true, gradient: 'from-amber-500 to-orange-600' },
@@ -232,6 +233,7 @@ function NewsletterSection() {
 function Blog() {
   return (
     <Layout>
+      <Seo title="Blog" />
       <HeroSection />
       <MarqueeSection />
       <FeaturedPost post={posts[0] ?? (posts.find(p => p) || { id: 0, title: 'Nenhum artigo', excerpt: '', gradient: 'from-gray-800 to-gray-900' })!} />

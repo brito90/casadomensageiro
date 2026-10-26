@@ -1,4 +1,5 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useState } from 'react'
 
 const videosAntigos = [
@@ -69,6 +70,7 @@ function Biblioteca() {
 
   return (
     <Layout>
+      <Seo title="Biblioteca" />
       {/* Hero Section */}
       <section className="relative pt-24 pb-12 bg-primary">
         <div className="max-w-6xl mx-auto px-4">

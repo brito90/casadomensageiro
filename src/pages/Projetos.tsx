@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 const categorias = [
   { id: 'todos', name: 'Todos', icon: '✨' },
@@ -282,6 +283,7 @@ function Projetos() {
 
   return (
     <Layout>
+      <Seo title="Projetos" />
       <HeroSection />
       <StatsSection />
 

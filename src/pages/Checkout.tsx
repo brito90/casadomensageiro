@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useCart } from '../context/CartContext'
 
 type Step = 1 | 2 | 3 | 4
@@ -54,6 +55,7 @@ function Checkout() {
 
   return (
     <Layout>
+      <Seo title="Checkout" />
       <div className="pt-24 pb-16 bg-gray-50 min-h-screen">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}

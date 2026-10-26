@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 const questions = [
   {
@@ -120,6 +121,7 @@ function Quiz() {
 
   return (
     <Layout>
+      <Seo title="Quiz" />
       <section className="relative pt-24 pb-16 overflow-hidden min-h-screen">
         <div className="absolute inset-0 gradient-hero"></div>
         <div className="absolute inset-0 opacity-10">

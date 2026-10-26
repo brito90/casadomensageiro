@@ -1,8 +1,10 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 function TrilhaEcológica() {
   return (
     <Layout>
+      <Seo title="TrilhaEcológica" />
       <section className="section-padding bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">

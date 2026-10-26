@@ -1,4 +1,5 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useState } from 'react'
 import { useTilt } from '../utils/useTilt'
 
@@ -133,6 +134,7 @@ function Buzios() {
 
   return (
     <Layout>
+      <Seo title="Buzios" />
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 overflow-hidden">
         <div className="absolute inset-0 gradient-hero"></div>

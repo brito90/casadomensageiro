@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useCart, Product } from '../context/CartContext'
 
 const allProducts: Product[] = [
@@ -34,6 +35,7 @@ function Produto() {
   if (!product) {
     return (
       <Layout>
+      <Seo title="Produto" />
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-primary mb-4">Produto não encontrado</h1>

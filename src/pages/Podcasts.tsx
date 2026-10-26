@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 const podcasts = [
   { id: 1, title: 'Vozes do Terreiro', host: 'Pai Rychelmy', category: 'Entrevistas', color: '#EF4444', episodes: 24, description: 'Conversas profundas com membros da comunidade.' },
@@ -423,6 +424,7 @@ function FloatingPlayer() {
 function Podcasts() {
   return (
     <Layout>
+      <Seo title="Podcasts" />
       <HeroSection />
       <PodcastCarousel />
       <WaveformSection />

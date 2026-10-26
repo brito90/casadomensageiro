@@ -1,8 +1,10 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 function Axelie() {
   return (
     <Layout>
+      <Seo title="Axelie" />
       <section className="section-padding bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">

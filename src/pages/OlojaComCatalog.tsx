@@ -1,8 +1,10 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 function OlojaComCatalog() {
   return (
     <Layout>
+      <Seo title="OlojaComCatalog" />
       <section className="section-padding bg-white">
         <div className="max-w-6xl mx-auto px-4">
           {/* OLOJÁ SECTION */}

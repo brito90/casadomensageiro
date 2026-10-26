@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { useTilt } from '../utils/useTilt'
 
 const categorias = [
@@ -167,6 +168,7 @@ function Festas() {
 
   return (
     <Layout>
+      <Seo title="Festas" />
       {/* Hero */}
       <section className="relative pt-24 pb-12 bg-gradient-to-br from-primary via-primary-600 to-primary-800">
         <div className="max-w-6xl mx-auto px-4 text-center">

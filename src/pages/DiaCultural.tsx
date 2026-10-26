@@ -1,8 +1,10 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 function DiaCultural() {
   return (
     <Layout>
+      <Seo title="DiaCultural" />
       <section className="section-padding bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">

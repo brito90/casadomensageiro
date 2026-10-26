@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 import { Card3D, Button3D, Icon3D } from '../utils/useTilt3D'
 
 const membroExemplo = {
@@ -45,6 +46,7 @@ function Membros() {
   if (isLoggedIn) {
     return (
       <Layout>
+      <Seo title="Membros" />
         {/* Dashboard Header */}
         <section className="pt-24 pb-8 gradient-primary">
           <div className="max-w-6xl mx-auto px-4">

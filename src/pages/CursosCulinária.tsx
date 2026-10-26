@@ -1,8 +1,10 @@
 import Layout from '../layouts/Layout'
+import Seo from '../components/Seo'
 
 function CursosCulinária() {
   return (
     <Layout>
+      <Seo title="CursosCulinária" />
       <section className="section-padding bg-gradient-to-br from-secondary-50 to-primary-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
