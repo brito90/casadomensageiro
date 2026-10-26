@@ -242,3 +242,9 @@
   clip-path: inset(0 0 0 0);
 }
 }
+
+.dark body { background: #0f0a08; color: #f5f1ec; }
+.dark .card-square { background: #1a1410; border-color: #f5f1ec; box-shadow: 4px 4px 0 #520c02; }
+.dark .btn-square { background: #520c02; border-color: #520c02; }
+.dark .btn-square-outline { background: transparent; color: #f5f1ec; border-color: #f5f1ec; }
+.dark .section-title { color: #f5f1ec; }
