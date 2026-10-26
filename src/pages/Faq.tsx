@@ -20,7 +20,7 @@ const faqItems = [
   { id: 6, category: 'visitas', question: 'Preciso levar alguma coisa para a visita?', answer: 'Não é necessário trazer nada. Apenas roupas modestas e respeitosas. Oferecemos água e acolhimento.' },
   { id: 7, category: 'espiritual', question: 'O que é um jogo de búzios?', answer: 'O jogo de búzios é uma forma de adivinhação e orientação espiritual utilizada no Candomblé. Os búzios são jogados e sua disposição revela mensagens dos Orixás.' },
   { id: 8, category: 'espiritual', question: 'Quem são os Orixás?', answer: 'Os Orixás são divindades da natureza no Candomblé, cada uma representando um elemento da natureza e aspectos da vida humana.' },
-  { id: 9, category: 'espiritual', question: 'Posso fazer uma consulta espiritual?', answer: 'Sim! Agende um jogo de búzios com o Pai de Santo pela página de Búzios ou pelo WhatsApp.' },
+  { id: 9, category: 'espiritual', question: 'Posso fazer uma consulta espiritual?', answer: 'Sim! Agende pelo WhatsApp com o Pai de Santo. Atendemos de terça a sábado.' },
   { id: 10, category: 'eventos', question: 'Como fico sabendo dos próximos eventos?', answer: 'Cadastre-se na newsletter, siga nossas redes sociais ou acesse a página de Eventos regularmente.' },
   { id: 11, category: 'eventos', question: 'Preciso me inscrever para participar dos eventos?', answer: 'Alguns eventos requerem inscrição prévia, outros são abertos. Verifique as informações na página do evento.' },
   { id: 12, category: 'eventos', question: 'Os eventos são gratuitos?', answer: 'A maioria dos nossos eventos é gratuita. Alguns workshops podem ter um valor simbólico para cobrir materiais.' },

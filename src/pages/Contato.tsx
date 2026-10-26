@@ -4,7 +4,7 @@ import { Card3D, Button3D, Icon3D } from '../utils/useTilt3D'
 
 const faq = [
   { q: 'Como posso participar das festas?', a: 'Basta comparecer no horário indicado. Todas as festas são abertas ao público e não é necessária inscrição prévia.' },
-  { q: 'Preciso marcar consulta com o Pai de Santo?', a: 'Sim, agende pelo WhatsApp ou pela página de Búzios. Atendemos de terça a sábado.' },
+  { q: 'Preciso marcar consulta com o Pai de Santo?', a: 'Sim, agende pelo WhatsApp. Atendemos de terça a sábado.' },
   { q: 'O terreiro recebe visitas?', a: 'Sim! Visitas são recebidas de terça a sábado, das 9h às 17h. Agende pelo WhatsApp.' },
   { q: 'Como posso ser voluntário?', a: 'Preencha o formulário abaixo ou fale conosco pelo WhatsApp. Teremos prazer em recebê-lo!' },
   { q: 'Quais são as formas de doação?', a: 'Aceitamos Pix, cartão de crédito, boleto e doação de materiais presencialmente no terreiro.' },
