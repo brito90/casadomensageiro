@@ -48,7 +48,7 @@ function Home() {
       <section className="section-padding bg-black text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
           {[
-            { n: '12+', l: 'Anos de tradição' },
+            { n: '20+', l: 'Anos de tradição' },
             { n: '500+', l: 'Consultas realizadas' },
             { n: '50+', l: 'Eventos por ano' },
           ].map((s, i) => (
