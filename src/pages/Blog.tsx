@@ -30,7 +30,7 @@ function HeroSection() {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
         <div className="absolute inset-0 opacity-30">
           {[...Array(30)].map((_, i) => (
             <div key={i} className="absolute text-6xl opacity-10" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, transform: `rotate(${Math.random() * 360}deg)` }}>
@@ -234,7 +234,7 @@ function Blog() {
     <Layout>
       <HeroSection />
       <MarqueeSection />
-      <FeaturedPost post={posts[0]} />
+      <FeaturedPost post={posts[0] ?? (posts.find(p => p) || { id: 0, title: 'Nenhum artigo', excerpt: '', gradient: 'from-gray-800 to-gray-900' })!} />
       <CategoriesBar />
       <MasonryGrid />
       <NewsletterSection />

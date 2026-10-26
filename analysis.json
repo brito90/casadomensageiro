@@ -1,0 +1,238 @@
+{
+  "nodes": [
+    {
+      "id": "entity:react",
+      "type": "entity",
+      "name": "React",
+      "summary": "JavaScript library for building user interfaces, used as the primary frontend framework",
+      "tags": ["entity", "framework"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:typescript",
+      "type": "entity",
+      "name": "TypeScript",
+      "summary": "Typed superset of JavaScript that compiles to plain JavaScript, used for type safety",
+      "tags": ["entity", "language"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:tailwindcss",
+      "type": "entity",
+      "name": "Tailwind CSS",
+      "summary": "CSS framework providing utility-first classes with custom color palette and animated keyframes",
+      "tags": ["entity", "framework", "css"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:vite",
+      "type": "entity",
+      "name": "Vite",
+      "summary": "Build tool and development server using ES modules for fast development experience",
+      "tags": ["entity", "build-tool"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:react-router-dom",
+      "type": "entity",
+      "name": "React Router DOM",
+      "summary": "Routing library for React applications enabling client-side navigation with Router, Routes, and Route components",
+      "tags": ["entity", "framework", "routing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:cartcontext",
+      "type": "entity",
+      "name": "Cart Context",
+      "summary": "React context providing cart state management (items, favorites, add/remove/update operations) with localStorage persistence",
+      "tags": ["entity", "context", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:darkmode",
+      "type": "entity",
+      "name": "Dark Mode",
+      "summary": "Theme toggle feature that persists user preference to localStorage and adds/removes 'dark' class on documentElement",
+      "tags": ["entity", "feature", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:chatwidget",
+      "type": "entity",
+      "name": "Chat Widget",
+      "summary": "WhatsApp floating widget for customer support with quick messages, input field, and visit counter badge",
+      "tags": ["entity", "feature", "communication"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:pairychelmy",
+      "type": "entity",
+      "name": "Pai Rychelmy",
+      "summary": "Lead spiritual guide of Casa do Mensageiro with over 25 years of experience serving the Orixás",
+      "tags": ["entity", "person", "leadership"],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:casa-do-mensageiro",
+      "type": "entity",
+      "name": "Casa do Mensageiro",
+      "summary": "Spiritual community website combining faith, acolhimento (welcoming), and transformation with e-commerce, blog, and service pages",
+      "tags": ["entity", "organization", "website"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:architecture-react-ts",
+      "type": "claim",
+      "name": "React TypeScript Architecture",
+      "summary": "The project is built with React and TypeScript, using a component-based architecture with React Router for navigation",
+      "tags": ["claim", "architecture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:feature-cart-localstorage",
+      "type": "claim",
+      "name": "Cart and Favorites LocalStorage Persistence",
+      "summary": "Cart and favorites state are persisted to localStorage, surviving browser sessions and persisting user selections",
+      "tags": ["claim", "feature", "persistence"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:feature-darkmode-localstorage",
+      "type": "claim",
+      "name": "Dark Mode LocalStorage Persistence",
+      "summary": "User's dark mode preference is saved to localStorage and applied to the document element on reload",
+      "tags": ["claim", "feature", "persistence"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:feature-whatsapp-integration",
+      "type": "claim",
+      "name": "WhatsApp Chat Widget",
+      "summary": "Floating chat widget integrated with WhatsApp for direct customer support, including quick messages and message counter",
+      "tags": ["claim", "feature", "communication"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:design-tailwind-v4",
+      "type": "claim",
+      "name": "Tailwind CSS v4 Custom Theme",
+      "summary": "Custom Tailwind CSS v4 configuration with primary/secondary/background color palette, animated keyframes, and design tokens",
+      "tags": ["claim", "design", "styling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:interaction-3d-tilt",
+      "type": "claim",
+      "name": "3D Tilt Effects",
+      "summary": "useTilt3D utility providing 3D tilt interactive effects on cards and hover elements throughout the site",
+      "tags": ["claim", "interaction", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:casa-do-mensageiro:pattern-react-strictmode",
+      "type": "claim",
+      "name": "React StrictMode Pattern",
+      "summary": "React StrictMode enabled in development for improved component mounting, error detection, and memory cleanup",
+      "tags": ["claim", "pattern", "development"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:react",
+      "type": "builds_on",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "The application is built using React as its primary UI framework"
+    },
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:typescript",
+      "type": "builds_on",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "The project uses TypeScript for type safety and component development"
+    },
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:tailwindcss",
+      "type": "builds_on",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Styling is implemented using Tailwind CSS with custom theme configuration"
+    },
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:vite",
+      "type": "builds_on",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "The development build and server are powered by Vite"
+    },
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:react-router-dom",
+      "type": "builds_on",
+      "direction": "forward",
+      "weight": 0.8,
+      "description": "Navigation is handled via React Router DOM with Route-based page routing"
+    },
+    {
+      "source": "entity:cartcontext",
+      "target": "entity:casa-do-mensageiro",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Cart Context exemplifies the project's localStorage persistence pattern for cart and favorites state"
+    },
+    {
+      "source": "entity:darkmode",
+      "target": "entity:casa-do-mensageiro",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Dark Mode exemplifies the project's localStorage persistence pattern for UI theme preferences"
+    },
+    {
+      "source": "entity:chatwidget",
+      "target": "entity:casa-do-mensageiro",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Chat Widget exemplifies the WhatsApp integration for customer support communication"
+    },
+    {
+      "source": "entity:casa-do-mensageiro",
+      "target": "entity:pairychelmy",
+      "type": "authored_by",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "The project's about section and chat widget are authored by and attribute content to Pai Rychelmy"
+    },
+    {
+      "source": "claim:casa-do-mensageiro:feature-cart-localstorage",
+      "target": "entity:cartcontext",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Cart localStorage persistence claim is exemplified by the Cart Context implementation"
+    },
+    {
+      "source": "claim:casa-do-mensageiro:feature-darkmode-localstorage",
+      "target": "entity:darkmode",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Dark mode localStorage persistence claim is exemplified by the Dark Mode implementation"
+    },
+    {
+      "source": "claim:casa-do-mensageiro:feature-whatsapp-integration",
+      "target": "entity:chatwidget",
+      "type": "exemplifies",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "WhatsApp integration claim is exemplified by the Chat Widget component"
+    }
+  ]
+}

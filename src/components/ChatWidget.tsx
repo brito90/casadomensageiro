@@ -85,9 +85,10 @@ function ChatWidget() {
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Digite sua mensagem..."
                 className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0 text-sm"
+                aria-label="Mensagem de WhatsApp"
               />
               <button
                 onClick={handleSend}
@@ -125,7 +126,7 @@ function ChatWidget() {
 
       {/* Notification Badge */}
       {!isOpen && (
-        <div className="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full flex items-center justify-center animate-pulse">
+        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[var(--color-accent)] rounded-full flex items-center justify-center animate-pulse">
           <span className="text-primary-900 text-xs font-bold">1</span>
         </div>
       )}

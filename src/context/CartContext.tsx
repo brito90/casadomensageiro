@@ -19,7 +19,7 @@ export interface CartItem extends Product {
   selectedColor: string
 }
 
-interface CartContextType {
+export interface CartContextType {
   items: CartItem[]
   favorites: number[]
   addToCart: (product: Product, color?: string) => void
@@ -33,25 +33,43 @@ interface CartContextType {
   favoritesCount: number
 }
 
+function parseSaved<T>(key: string, defaultValue: T): T {
+  try {
+    const saved = localStorage.getItem(key)
+    return saved ? JSON.parse(saved) : defaultValue
+  } catch {
+    console.warn(`Failed to parse localStorage key: ${key}`)
+    return defaultValue
+  }
+}
+
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('cart')
-    return saved ? JSON.parse(saved) : []
+    return parseSaved<CartItem[]>( 'cart', [])
   })
 
   const [favorites, setFavorites] = useState<number[]>(() => {
-    const saved = localStorage.getItem('favorites')
-    return saved ? JSON.parse(saved) : []
+    return parseSaved<number[]>( 'favorites', [])
   })
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(items))
+    const serialized = JSON.stringify(items)
+    try {
+      localStorage.setItem('cart', serialized)
+    } catch (error) {
+      console.error('localStorage quota exceeded, cart not saved', error)
+    }
   }, [items])
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites))
+    const serialized = JSON.stringify(favorites)
+    try {
+      localStorage.setItem('favorites', serialized)
+    } catch (error) {
+      console.error('localStorage quota exceeded, favorites not saved', error)
+    }
   }, [favorites])
 
   const addToCart = (product: Product, color?: string) => {

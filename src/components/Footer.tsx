@@ -19,6 +19,9 @@ const footerLinks = {
     { name: 'Política de Privacidade', path: '/privacidade' },
     { name: 'Termos de Uso', path: '/termos' },
   ],
+  endereco: [
+    { name: 'Rua exemplo 123', path: '/', whatsapp: '5511999999999' },
+  ],
 }
 
 const socialLinks = [
@@ -59,6 +62,23 @@ function Footer() {
                   >
                     {link.name}
                   </Link>
+                </li>
+              ))}
+            </ul>
+            <ul className="space-y-2">
+              {footerLinks.endereco.map((link) => (
+                <li key={link.path}>
+                  <div className="flex items-center gap-3">
+                    <span className="text-white/70 text-sm">
+                      {link.name}
+                    </span>
+                    <a
+                      href={`https://wa.me/${link.whatsapp}?text=Gostaria%20de%20mais%20informações%20sobre%20a%20Casa%20do%20Mensageiro`}
+                      className="bg-primary text-white px-3 py-1 rounded text-sm hover:bg-primary-600 transition-colors"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
                 </li>
               ))}
             </ul>
