@@ -6,7 +6,7 @@ const podcasts = [
   { id: 2, title: 'Sabedoria Ancestral', host: 'Mãe de Santo', category: 'História', color: '#F59E0B', episodes: 18, description: 'Ensinamentos transmitidos por gerações.' },
   { id: 3, title: 'Mente e Espírito', host: 'Dr. Espiritual', category: 'Saúde Mental', color: '#10B981', episodes: 15, description: 'Conexão entre saúde mental e fé.' },
   { id: 4, title: 'Ritmos Sagrados', host: 'Mestre de Atabaques', category: 'Música', color: '#8B5CF6', episodes: 12, description: 'A música nos rituais sagrados.' },
-  { id: 5, title: 'Caminhos de Exu', host: 'Pai Rychelmy', category: 'Espiritualidade', color: '#DC2626', episodes: 20, description: 'Desmistificando Exu.' },
+  { id: 5, title: 'Caminhos de Exu', host: 'Pai Rychelmy', category: 'Espiritualidade', color: '#520c02', episodes: 20, description: 'Desmistificando Exu.' },
   { id: 6, title: 'Bate-papo com Orixá', host: 'Comunidade', category: 'Mitologia', color: '#2563EB', episodes: 16, description: 'Entendendo cada Orixá.' },
   { id: 7, title: 'Mulheres do Axé', host: 'Mãe de Santo', category: 'Entrevistas', color: '#EC4899', episodes: 10, description: 'Histórias de mulheres fortes.' },
   { id: 8, title: 'Alimentação e Orixás', host: 'Cozinheira', category: 'Cultura', color: '#14B8A6', episodes: 8, description: 'Comida e espiritualidade.' },

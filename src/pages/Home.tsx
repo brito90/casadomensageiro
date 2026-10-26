@@ -33,7 +33,7 @@ function Home() {
         <NextEvents />
       </ScrollReveal>
 
-      <SectionDivider color="#DC2626" />
+      <SectionDivider color="#520c02" />
 
       <ScrollReveal>
         <Newsletter />
