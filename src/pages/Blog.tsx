@@ -118,8 +118,7 @@ function FeaturedPost({ post }: { post: typeof posts[0] }) {
   )
 }
 
-function CategoriesBar() {
-  const [active, setActive] = useState(0)
+function CategoriesBar({ active, setActive }: { active: number; setActive: (i: number) => void }) {
   return (
     <section className="py-12 bg-gray-900 sticky top-16 z-40">
       <div className="max-w-6xl mx-auto px-4">
@@ -147,7 +146,7 @@ function CategoriesBar() {
   )
 }
 
-function MasonryGrid() {
+function MasonryGrid({ posts: list }: { posts: typeof posts }) {
   return (
     <section className="py-24 bg-black">
       <div className="max-w-6xl mx-auto px-4">
@@ -155,7 +154,7 @@ function MasonryGrid() {
           Últimos <span className="text-amber-500">Artigos</span>
         </h2>
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {posts.slice(1).map((post, i) => (
+          {list.slice(1).map((post, i) => (
             <article key={post.id} className="break-inside-avoid group cursor-pointer">
               <div className={`rounded-2xl overflow-hidden bg-gradient-to-br ${post.gradient} aspect-[4/3] relative mb-4`}>
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
@@ -231,14 +230,40 @@ function NewsletterSection() {
 }
 
 function Blog() {
+  const [active, setActive] = useState(0)
+  const [search, setSearch] = useState('')
+  const [visible, setVisible] = useState(6)
+
+  const filtered = posts.filter(p => {
+    const catMatch = active === -1 ? true : p.category === categories[active]?.name
+    const searchMatch = p.title.toLowerCase().includes(search.toLowerCase()) || p.excerpt.toLowerCase().includes(search.toLowerCase())
+    return catMatch && searchMatch
+  })
+
   return (
     <Layout>
       <Seo title="Blog" />
       <HeroSection />
       <MarqueeSection />
-      <FeaturedPost post={posts[0] ?? (posts.find(p => p) || { id: 0, title: 'Nenhum artigo', excerpt: '', gradient: 'from-gray-800 to-gray-900' })!} />
-      <CategoriesBar />
-      <MasonryGrid />
+      <FeaturedPost post={filtered[0] ?? posts[0]} />
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <input
+          type="text"
+          placeholder="Buscar artigos..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full px-4 py-3 border-2 border-black focus:outline-none"
+        />
+      </div>
+      <CategoriesBar active={active} setActive={setActive} />
+      <MasonryGrid posts={filtered.slice(0, visible)} />
+      {visible < filtered.length && (
+        <div className="text-center py-8">
+          <button onClick={() => setVisible(v => v + 6)} className="btn-square">
+            Carregar mais
+          </button>
+        </div>
+      )}
       <NewsletterSection />
     </Layout>
   )
