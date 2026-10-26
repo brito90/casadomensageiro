@@ -41,7 +41,7 @@ function Footer() {
               <span className="font-heading font-bold text-xl">
                 Casa do Mensageiro
               </span>
-              <img src="/logo.svg" alt="Casa do Mensageiro" className="h-12 w-auto bg-white rounded-full p-1" />
+              <img src="/logo.png" alt="Casa do Mensageiro" className="h-12 w-auto" />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed">
               Um terreiro de fé, tradição e axé. Acolhimento para todos que buscam a paz dos Orixás.

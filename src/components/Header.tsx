@@ -48,7 +48,7 @@ function Header() {
               }`}>
                 Casa do Mensageiro
               </span>
-              <img src="/logo.svg" alt="Casa do Mensageiro" className="h-10 w-auto" />
+              <img src="/logo.png" alt="Casa do Mensageiro" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
