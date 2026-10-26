@@ -38,9 +38,7 @@ function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <span className="text-primary font-heading font-bold text-xl">CM</span>
-              </div>
+              <img src="/logo.svg" alt="Casa do Mensageiro" className="h-12 w-auto bg-white rounded-full p-1" />
               <span className="font-heading font-bold text-xl">
                 Casa do Mensageiro
               </span>
