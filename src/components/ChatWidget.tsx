@@ -1,17 +1,17 @@
 import { useState } from 'react'
+import { whatsappLink } from '../config/site'
 
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
 
-  const handleSend = () => {
-    if (message.trim()) {
-      const encoded = encodeURIComponent(message)
-      window.open(`https://wa.me/5511999999999?text=${encoded}`, '_blank')
-      setMessage('')
-      setIsOpen(false)
-    }
+const handleSend = () => {
+  if (message.trim()) {
+    window.open(whatsappLink(message), '_blank')
+    setMessage('')
+    setIsOpen(false)
   }
+}
 
   const quickMessages = [
     'Gostaria de saber mais sobre um produto',

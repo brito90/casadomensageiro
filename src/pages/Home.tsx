@@ -1,6 +1,7 @@
 import Layout from '../layouts/Layout'
 import Hero from '../components/Hero'
 import ClipReveal from '../components/ClipReveal'
+import Seo from '../components/Seo'
 import { Link } from 'react-router-dom'
 
 const blocks = [
@@ -13,6 +14,7 @@ const blocks = [
 function Home() {
   return (
     <Layout>
+      <Seo title="Início" description="Casa do Mensageiro — espaço de fé, acolhimento e transformação." />
       <Hero />
 
       <section className="section-padding bg-background">
