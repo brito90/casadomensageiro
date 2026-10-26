@@ -1,5 +1,5 @@
 import Layout from '../layouts/Layout'
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import ProductCarousel from '../components/ProductCarousel'
@@ -50,22 +50,39 @@ const acessoriosProducts = produtos.filter(p => p.category === 'acessorios')
 function Loja() {
   const [selectedCategory, setSelectedCategory] = useState('todos')
   const [searchTerm, setSearchTerm] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [sortBy, setSortBy] = useState('popular')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
-  const { favorites, favoritesCount } = useCart()
+  const [toast, setToast] = useState<string | null>(null)
+  const { favorites, favoritesCount, addToCart } = useCart()
 
-  const filteredProducts = produtos.filter(produto => {
-    const matchesCategory = selectedCategory === 'todos' || produto.category === selectedCategory
-    const matchesSearch = produto.name.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesFavorites = !showFavoritesOnly || favorites.includes(produto.id)
-    return matchesCategory && matchesSearch && matchesFavorites
-  }).sort((a, b) => {
-    if (sortBy === 'price-low') return a.price - b.price
-    if (sortBy === 'price-high') return b.price - a.price
-    if (sortBy === 'rating') return b.rating - a.rating
-    return b.reviews - a.reviews
-  })
+  // debounce search
+  const handleSearch = useCallback((v: string) => {
+    setSearchTerm(v)
+    window.clearTimeout((handleSearch as any)._t)
+    ;(handleSearch as any)._t = window.setTimeout(() => setDebouncedSearch(v), 300)
+  }, [])
+
+  const filteredProducts = useMemo(() => {
+    return produtos.filter(produto => {
+      const matchesCategory = selectedCategory === 'todos' || produto.category === selectedCategory
+      const matchesSearch = produto.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+      const matchesFavorites = !showFavoritesOnly || favorites.includes(produto.id)
+      return matchesCategory && matchesSearch && matchesFavorites
+    }).sort((a, b) => {
+      if (sortBy === 'price-low') return a.price - b.price
+      if (sortBy === 'price-high') return b.price - a.price
+      if (sortBy === 'rating') return b.rating - a.rating
+      return b.reviews - a.reviews
+    })
+  }, [selectedCategory, debouncedSearch, showFavoritesOnly, favorites, sortBy])
+
+  const handleAddToCart = useCallback((produto: typeof produtos[0]) => {
+    addToCart(produto)
+    setToast(`${produto.name} adicionado ao carrinho`)
+    window.setTimeout(() => setToast(null), 2500)
+  }, [addToCart])
 
   return (
     <Layout>
@@ -125,7 +142,7 @@ function Loja() {
                 type="text"
                 placeholder="Buscar produtos..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0 transition-colors"
               />
               <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,10 +155,10 @@ function Loja() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 text-sm font-medium transition-all border-2 ${
                     selectedCategory === cat.id
-                      ? 'gradient-primary text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-[#520c02] text-white border-[#520c02]'
+                      : 'bg-white text-black border-black hover:bg-gray-100'
                   }`}
                 >
                   {cat.icon} {cat.name}
@@ -211,13 +228,13 @@ function Loja() {
           {viewMode === 'grid' ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((produto) => (
-                <ProdutoCardGrid key={produto.id} produto={produto} />
+                <ProdutoCardGrid key={produto.id} produto={produto} onAdd={handleAddToCart} />
               ))}
             </div>
           ) : (
             <div className="space-y-4">
               {filteredProducts.map((produto) => (
-                <ProdutoCardList key={produto.id} produto={produto} />
+                <ProdutoCardList key={produto.id} produto={produto} onAdd={handleAddToCart} />
               ))}
             </div>
           )}
@@ -266,6 +283,13 @@ function Loja() {
         </div>
       </section>
 
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 bg-black text-white px-6 py-3 border-2 border-black shadow-[4px_4px_0_#520c02]">
+          {toast}
+        </div>
+      )}
+
       {/* Notifications */}
       <Notifications />
     </Layout>
@@ -273,12 +297,12 @@ function Loja() {
 }
 
 // Grid Card Component
-function ProdutoCardGrid({ produto }: { produto: typeof produtos[0] }) {
-  const { addToCart, toggleFavorite, isFavorite } = useCart()
+function ProdutoCardGrid({ produto, onAdd }: { produto: typeof produtos[0]; onAdd: (p: typeof produtos[0]) => void }) {
+  const { toggleFavorite, isFavorite } = useCart()
   const discount = Math.round((1 - produto.price / produto.originalPrice) * 100)
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
+    <div className="card-square overflow-hidden group">
       <Link to={`/produto/${produto.id}`} className="relative h-44 bg-gradient-to-br from-primary-100 to-primary-50 block">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-6xl group-hover:scale-110 transition-transform duration-300">
@@ -291,15 +315,15 @@ function ProdutoCardGrid({ produto }: { produto: typeof produtos[0] }) {
         </div>
         {produto.badge && (
           <div className="absolute top-3 left-3">
-            <span className="gradient-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+            <span className="bg-[#520c02] text-white text-xs font-bold px-3 py-1">
               {produto.badge}
             </span>
           </div>
         )}
         <button
           onClick={(e) => { e.preventDefault(); toggleFavorite(produto.id); }}
-          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-            isFavorite(produto.id) ? 'bg-red-500 text-white' : 'bg-white/80 text-gray-400 hover:text-red-500'
+          className={`absolute top-3 right-3 w-8 h-8 border-2 border-black flex items-center justify-center transition-all ${
+            isFavorite(produto.id) ? 'bg-[#520c02] text-white' : 'bg-white text-gray-400 hover:text-[#520c02]'
           }`}
         >
           <svg className="w-4 h-4" fill={isFavorite(produto.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
@@ -309,13 +333,13 @@ function ProdutoCardGrid({ produto }: { produto: typeof produtos[0] }) {
       </Link>
       <div className="p-4">
         <Link to={`/produto/${produto.id}`}>
-          <h3 className="font-heading font-bold text-primary text-sm mb-1 group-hover:text-primary-600 transition-colors line-clamp-1">
+          <h3 className="font-heading font-bold text-[#520c02] text-sm mb-1 group-hover:opacity-80 transition-colors line-clamp-1">
             {produto.name}
           </h3>
         </Link>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-lg font-bold text-primary">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
+            <span className="text-lg font-bold text-[#520c02]">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
             {discount > 0 && (
               <span className="text-xs text-gray-400 line-through ml-2">
                 R$ {produto.originalPrice.toFixed(2).replace('.', ',')}
@@ -323,8 +347,8 @@ function ProdutoCardGrid({ produto }: { produto: typeof produtos[0] }) {
             )}
           </div>
           <button
-            onClick={() => addToCart(produto)}
-            className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center text-white hover:opacity-90 transition-opacity"
+            onClick={() => onAdd(produto)}
+            className="btn-square text-xs px-3 py-2"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -337,12 +361,12 @@ function ProdutoCardGrid({ produto }: { produto: typeof produtos[0] }) {
 }
 
 // List Card Component
-function ProdutoCardList({ produto }: { produto: typeof produtos[0] }) {
-  const { addToCart, toggleFavorite, isFavorite } = useCart()
+function ProdutoCardList({ produto, onAdd }: { produto: typeof produtos[0]; onAdd: (p: typeof produtos[0]) => void }) {
+  const { toggleFavorite, isFavorite } = useCart()
   const discount = Math.round((1 - produto.price / produto.originalPrice) * 100)
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex">
+    <div className="card-square overflow-hidden flex">
       <Link to={`/produto/${produto.id}`} className="w-48 h-48 bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center flex-shrink-0">
         <span className="text-6xl">
           {produto.category === 'nichos' ? '🏠' :
@@ -355,12 +379,12 @@ function ProdutoCardList({ produto }: { produto: typeof produtos[0] }) {
       <div className="flex-1 p-5 flex flex-col justify-between">
         <div>
           <div className="flex items-start justify-between mb-2">
-            <Link to={`/produto/${produto.id}`} className="font-heading font-bold text-lg text-primary hover:text-primary-600 transition-colors">
+            <Link to={`/produto/${produto.id}`} className="font-heading font-bold text-lg text-[#520c02] hover:opacity-80 transition-colors">
               {produto.name}
             </Link>
             <button
               onClick={() => toggleFavorite(produto.id)}
-              className={`transition-colors ${isFavorite(produto.id) ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
+              className={`transition-colors ${isFavorite(produto.id) ? 'text-[#520c02]' : 'text-gray-400 hover:text-[#520c02]'}`}
             >
               <svg className="w-5 h-5" fill={isFavorite(produto.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -371,12 +395,12 @@ function ProdutoCardList({ produto }: { produto: typeof produtos[0] }) {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-primary">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
+            <span className="text-xl font-bold text-[#520c02]">R$ {produto.price.toFixed(2).replace('.', ',')}</span>
             {discount > 0 && <span className="text-sm text-green-600 font-semibold">-{discount}%</span>}
           </div>
           <button
-            onClick={() => addToCart(produto)}
-            className="btn-primary text-sm px-4 py-2"
+            onClick={() => onAdd(produto)}
+            className="btn-square text-sm px-4 py-2"
           >
             Adicionar
           </button>
