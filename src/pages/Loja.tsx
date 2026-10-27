@@ -1,6 +1,6 @@
 import Layout from '../layouts/Layout'
 import Seo from '../components/Seo'
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import ProductCarousel from '../components/ProductCarousel'
@@ -54,9 +54,11 @@ function Loja() {
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [sortBy, setSortBy] = useState('popular')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [visible, setVisible] = useState(12)
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
   const { favorites, favoritesCount, addToCart } = useCart()
+  useEffect(() => { setVisible(12) }, [selectedCategory, debouncedSearch, showFavoritesOnly, sortBy])
 
   // debounce search
   const handleSearch = useCallback((v: string) => {
@@ -229,15 +231,23 @@ function Loja() {
 
           {viewMode === 'grid' ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((produto) => (
+              {filteredProducts.slice(0, visible).map((produto) => (
                 <ProdutoCardGrid key={produto.id} produto={produto} onAdd={handleAddToCart} />
               ))}
             </div>
           ) : (
             <div className="space-y-4">
-              {filteredProducts.map((produto) => (
+              {filteredProducts.slice(0, visible).map((produto) => (
                 <ProdutoCardList key={produto.id} produto={produto} onAdd={handleAddToCart} />
               ))}
+            </div>
+          )}
+
+          {visible < filteredProducts.length && (
+            <div className="text-center mt-8">
+              <button onClick={() => setVisible(v => v + 12)} className="btn-square">
+                Carregar mais
+              </button>
             </div>
           )}
 
