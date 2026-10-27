@@ -31,6 +31,7 @@ const ProjetosAmbientais = lazy(() => import('./pages/ProjetosAmbientais'))
 const CursosCulinária = lazy(() => import('./pages/CursosCulinária'))
 const OlojaComCatalog = lazy(() => import('./pages/OlojaComCatalog'))
 const AssociacaoSociedadeCivil = lazy(() => import('./pages/AssociacaoSociedadeCivil'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function PageFallback() {
   return (
@@ -73,6 +74,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/associacao-sociedade-civil" element={<AssociacaoSociedadeCivil />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>
