@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
-import ChatWidget from './components/ChatWidget'
+const ChatWidget = lazy(() => import('./components/ChatWidget'))
 import DarkMode from './components/DarkMode'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -78,7 +78,9 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
-      <ChatWidget />
+<Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
       <div className="fixed bottom-6 left-6 z-50">
         <DarkMode />
       </div>
