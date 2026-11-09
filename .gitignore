@@ -4,6 +4,11 @@ node_modules/
 # Build output
 dist/
 
+# Playwright
+playwright-report/
+test-results/
+playwright/.cache/
+
 # Environment variables
 .env
 .env.local
@@ -26,3 +31,5 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+.vercel
